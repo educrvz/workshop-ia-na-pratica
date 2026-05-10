@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sessão 2 · IA na Prática</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="brand-bar"></div>
+  <main class="container">
+    <p class="eyebrow">DC Cruz · Workshop · Maio 2026</p>
+
+    <p class="subtitle">IA na Prática</p>
+
+    <p class="session-indicator">Sessão 2 de 3</p>
+    <h1>Produtividade na prática</h1>
+    <p class="tagline">Skills · Plugins · Projects · Notas → ata · Personalização · Biblioteca-base</p>
+
+    <div class="callout callout-config">
+      <strong>Sobre as ferramentas nesta sessão</strong><br>
+      Continuamos no Claude pago. Os prompts também rodam em ChatGPT, Copilot e Gemini, mas vamos padronizar no Claude.
+    </div>
+
+    <h2>Agenda</h2>
+    <ul class="toc">
+      <li><a href="#skills-conceito">A. Skill, plugin e project — o que é cada um</a></li>
+      <li><a href="#exercicio-2-1">2.1 Exercício — Notas de reunião → ata estruturada</a></li>
+      <li><a href="#exercicio-2-2">2.2 Exercício — Personalizando uma skill</a></li>
+      <li><a href="#biblioteca">Biblioteca de skills — pontos de partida</a></li>
+      <li>Wrap-up e preview da Sessão 3</li>
+    </ul>
+
+    <hr>
+
+    <h2 id="skills-conceito">A. Skill, plugin e project: o que é cada um</h2>
+    <p>Na Sessão 1 a gente viu o que é um prompt e o que separa um bom de um ruim. Agora um passo além: como transformar um prompt que funcionou em algo reutilizável, organizado e sempre à mão.</p>
+
+    <h3>Skill</h3>
+    <p>Uma <strong>skill</strong> é um prompt salvo que você reutiliza. Em vez de reescrever as instruções toda vez, você salva uma vez — como um modelo no Word, mas para a IA. Cobre uma tarefa específica: transformar notas em ata, escrever uma proposta para cliente novo, montar um briefing antes de uma reunião, responder a um e-mail difícil.</p>
+    <p>Skills geralmente vivem em arquivos <code>.md</code> (markdown — um <code>.txt</code> com formatação leve). Você baixa o arquivo, carrega na sua ferramenta, e pronto.</p>
+
+    <h3>Plugin</h3>
+    <p>Um <strong>plugin</strong> é um conjunto de skills empacotadas juntas para uma função ou fluxo de trabalho completo. Em vez de instalar cada skill separadamente, o plugin traz tudo de uma vez. Por exemplo: um plugin de comercial poderia incluir skills de qualificação de lead, redação de proposta e follow-up pós-reunião, todas juntas.</p>
+
+    <h3>Project</h3>
+    <p>Um <strong>Project</strong> existe no Claude, no ChatGPT e no Copilot — os três usam o mesmo nome. É um espaço onde você salva um briefing permanente para a IA: quem você é, qual seu negócio, como você escreve, o que ela nunca deve fazer. A IA começa cada conversa dentro daquele Project já sabendo tudo isso — sem você precisar repetir.</p>
+    <p>O arquivo de instruções de um Project funciona como um documento que diz à IA o que significa "trabalhar com você": seu tom, sua área, suas regras, os termos que você usa. As skills que você cria nesta sessão podem ser carregadas dentro de um Project para ficarem sempre disponíveis.</p>
+
+    <div class="callout callout-tip">
+      <strong>A relação entre os três:</strong><br>
+      Prompt = instrução que você escreve agora, uma vez.<br>
+      Skill = prompt salvo para reutilizar sempre.<br>
+      Plugin = coleção de skills para uma área inteira.<br>
+      Project = briefing permanente onde suas skills ficam sempre ativas.
+    </div>
+
+    <hr>
+
+    <div class="exercise" id="exercicio-2-1">
+      <h2>2.1 Exercício — Notas de reunião → ata estruturada</h2>
+
+      <p class="callout callout-objective">Transformar anotações soltas (em papel ou no celular) numa ata organizada — pronta para mandar para os participantes ou guardar como registro. Funciona com reunião com cliente, reunião interna, reunião com fornecedor.</p>
+
+      <ol>
+        <li>Escolha uma reunião recente para a qual você tem anotações em papel — caderno, bloco, post-it. Se não tiver nada à mão, use estas <a href="https://drive.google.com/drive/folders/1JqrWBC4gRA2vVhShqCNYhl5OBj7gN3tg">fotos de exemplo</a>.</li>
+        <li>Tire foto das notas com o celular.</li>
+        <li>Abra o Claude, cole o prompt abaixo e anexe a(s) foto(s).</li>
+        <li>Revise o resultado. Se algo ficou faltando, peça para a IA melhorar — ela ajusta na hora.</li>
+      </ol>
+
+      <p><strong>Skill — Notas de reunião → ata estruturada</strong></p>
+<pre>Você é um assistente que ajuda profissionais a organizarem notas de reunião.
+Transforme as notas abaixo em uma ata organizada.
+
+Formato:
+
+ATA DE REUNIÃO
+Data: [das notas, ou em branco]
+Participantes: [das notas, ou em branco]
+Assunto: [uma linha]
+
+TEMAS DISCUTIDOS
+[Agrupe tópicos relacionados em seções com subtítulo curto. Transforme os
+fragmentos em frases legíveis. Não deixe 20 bullets soltos.]
+
+DECISÕES TOMADAS
+[Só inclua se houver decisões explícitas nas notas. Caso contrário, omita
+a seção e pergunte no final.]
+
+PRÓXIMOS PASSOS
+[Só inclua se houver ações explícitas nas notas, no formato:
+"- Ação (responsável, prazo)". Caso contrário, omita e pergunte no final.]
+
+Ao final, adicione uma seção PARA COMPLETAR com perguntas (máx. 3-4) para
+eu preencher o que faltou — participantes, decisões, próximos passos, ou
+trechos ambíguos. Tom colaborativo.
+
+Regras:
+- Preserve siglas, nomes próprios, números e valores literais.
+- Se algo está ambíguo nas notas, use [trecho pouco claro] ou [palavra?].
+- Nada de placeholders tipo "não mencionado" — se falta info, omita a seção
+  e pergunte depois.</pre>
+    </div>
+
+    <hr>
+
+    <div class="exercise" id="exercicio-2-2">
+      <h2>2.2 Exercício — Personalizando uma skill</h2>
+
+      <p class="callout callout-objective">Pegar a Skill A (preparação de reunião — genérica) e transformá-la numa skill <em>sua</em>, calibrada para o tipo de reunião que você faz com mais frequência: primeira reunião com cliente novo, alinhamento com fornecedor, kickoff de obra, entrevista de candidato.</p>
+
+      <ol>
+        <li>Copie o texto da <strong>Skill A — Preparação de reunião</strong> (mais abaixo).</li>
+        <li>Cole o prompt abaixo no Claude, junto com a Skill A.</li>
+        <li>Responda as perguntas que a IA fizer sobre a sua rotina.</li>
+        <li>A IA devolve uma nova skill, personalizada. Teste com um caso fictício e ajuste se necessário.</li>
+      </ol>
+
+      <p><strong>Prompt — copie e cole (com a Skill A logo depois)</strong></p>
+<pre>Abaixo está uma skill genérica de preparação de reunião. Quero transformá-la
+em uma skill específica para o tipo de reunião que faço com mais frequência —
+adaptada à minha rotina.
+
+Antes de reescrever a skill, me faça de 4 a 6 perguntas, uma por vez, para entender:
+- que tipo de reunião eu mais faço (cliente novo, fornecedor, alinhamento interno, etc.)
+- o que sempre quero descobrir nessa reunião
+- que perguntas eu nunca esqueço de fazer
+- que documentos costumo levar ou pedir
+- que riscos ou pontos de atenção preciso checar antes
+- que formato de briefing me ajuda mais (curto e direto ou completo)
+
+Espere minha resposta antes de passar para a próxima pergunta.
+
+Depois que eu responder tudo, reescreva a skill — mantendo a estrutura de
+instrução, mas agora específica para o meu tipo de reunião, incorporando
+as minhas respostas. Devolva a skill pronta em um bloco de código, para
+eu copiar e salvar.
+
+Skill genérica:
+[cole a Skill A aqui]</pre>
+    </div>
+
+    <hr>
+
+    <h2 id="biblioteca">Biblioteca de skills — pontos de partida</h2>
+    <p>As skills abaixo são <strong>pontos de partida</strong>, não versões finais. Pegue a que se conecta com uma tarefa sua, teste no Claude, e personalize usando o método do exercício 2.2 — é isso que transforma uma skill genérica numa skill <em>sua</em>.</p>
+
+    <h3>Skill A — Preparação de reunião <a href="skills/skill-preparacao-reuniao.md">📄 baixar .md</a></h3>
+    <p>Para qualquer reunião com cliente, fornecedor, candidato ou interna — gera agenda e pontos de atenção. Skill propositalmente genérica: é o ponto de partida do exercício 2.2. O valor real aparece quando você personaliza para um tipo específico de reunião que você faz com frequência.</p>
+<pre>Você é um assistente que ajuda profissionais a se prepararem para reuniões.
+
+Com base no contexto abaixo, prepare um briefing com:
+1. Objetivo da reunião (em uma linha)
+2. Agenda sugerida (tópicos em ordem lógica, com tempo estimado por tópico)
+3. Pontos de atenção: o que eu preciso saber antes de entrar na reunião
+4. Perguntas-chave a fazer durante a reunião
+5. Documentos que devem estar em mãos
+
+Contexto da reunião:
+- Tipo: [cliente / fornecedor / candidato / interna]
+- Assunto: [descrever]
+- Participantes: [listar]
+- Histórico relevante: [descrever ou deixar em branco]
+
+Regras:
+- Se o contexto fornecido não for suficiente para responder algum item do
+  briefing, diga qual informação está faltando — não preencha com suposições.
+- Não invente histórico ou contexto que não foi informado.</pre>
+
+    <h3>Skill B — Resposta a e-mail delicado <a href="skills/skill-resposta-email-delicado.md">📄 baixar .md</a></h3>
+    <p>Quando você recebe (ou precisa enviar) um e-mail difícil — cliente irritado, cobrança que não foi paga, prazo que não vai dar, feedback duro para um fornecedor ou candidato. A skill devolve 2 versões da resposta: uma "mais firme" e uma "mais cordial" — você escolhe e ajusta.</p>
+<pre>Você é um assistente experiente em comunicação profissional. Vou te mandar
+um e-mail que recebi (ou um contexto de uma conversa difícil que preciso
+puxar), e quero ajuda para responder bem.
+
+Antes de redigir, faça uma leitura crítica do que recebi:
+1. Identifique o que a outra pessoa REALMENTE está pedindo (pode estar
+   embaixo do tom, não na superfície).
+2. Identifique o que ela está sentindo (irritação, ansiedade, decepção)
+   — sem julgar, só nomear.
+3. Identifique o que NÃO posso ignorar nem terceirizar na resposta.
+
+Depois redija DUAS versões da resposta:
+
+VERSÃO A — MAIS FIRME
+- Direta sobre o que é e o que não é possível.
+- Cordial, mas sem se desculpar excessivamente.
+- Estabelece limite ou expectativa com clareza.
+
+VERSÃO B — MAIS CORDIAL
+- Reconhece o sentimento do outro lado.
+- Constrói ponte antes de entregar a notícia.
+- Mesma essência, menos arestas.
+
+Para AMBAS as versões:
+- Tom profissional, sem floreios.
+- Máximo 4 parágrafos.
+- Termina com próximo passo claro (não deixa a bola no chão).
+
+Ao final, em uma linha, recomende qual versão usar com base no contexto e
+explique por quê. Se o contexto que eu der não for suficiente para você
+escolher bem o tom, me pergunte ANTES de redigir.
+
+Regras:
+- Não invente fato, número, prazo ou pessoa que eu não tenha mencionado.
+- Não use "estou à disposição" como muleta. Se for incluir frase de
+  fechamento, que seja específica.
+
+Contexto / e-mail recebido:
+[cole aqui]</pre>
+
+    <h3>Skill C — Briefing executivo (resumo de doc longo) <a href="skills/skill-briefing-executivo.md">📄 baixar .md</a></h3>
+    <p>Você recebeu um documento longo — um contrato, uma proposta de fornecedor, um relatório, um regulamento — e precisa entender o que importa em 5 minutos. Esta skill devolve um briefing de 1 página com pontos de decisão claros.</p>
+<pre>Você é um analista que prepara briefings executivos. Vou te mandar um
+documento longo (contrato, proposta, relatório, regulamento, plano de
+negócio). Devolva um briefing de UMA página com a seguinte estrutura:
+
+BRIEFING EXECUTIVO
+
+1. O QUE É (1-2 linhas)
+   Diga em palavras simples o que é o documento e qual seu propósito.
+
+2. PARTES ENVOLVIDAS
+   Quem assina, quem paga, quem entrega, quem fiscaliza. Use os nomes que
+   aparecem no documento.
+
+3. NÚMEROS QUE IMPORTAM
+   Liste os 3-5 números mais importantes (valores, prazos, multas, taxas,
+   percentuais). Cite o trecho ou a cláusula de onde tirou cada um.
+
+4. COMPROMISSOS
+   O que CADA parte se compromete a fazer? Liste em bullets. Sinalize com
+   ⚠ qualquer compromisso assimétrico (uma parte pega muito mais risco
+   que a outra).
+
+5. PONTOS DE ATENÇÃO (até 3)
+   Cláusulas, condições ou números que merecem ser revisados ou
+   negociados. Para cada um: trecho literal + por que está no radar.
+
+6. PERGUNTAS QUE EU FARIA ANTES DE ASSINAR (até 3)
+   Coisas que o documento NÃO esclarece e que você buscaria entender.
+
+Regras:
+- Cite trechos literais entre aspas onde for citar o documento.
+- Não invente cláusula, valor ou parte que não esteja no texto.
+- Se o documento for ambíguo em algum ponto, diga "ambíguo: [trecho]" em vez
+  de chutar interpretação.
+- O briefing inteiro deve caber em UMA página. Se está estourando, encurte.
+
+Documento:
+[cole ou anexe]</pre>
+
+    <h3>Skill D — Revisão estruturada de documento <a href="skills/skill-revisao-documento.md">📄 baixar .md</a></h3>
+    <p>Análise de um documento qualquer — proposta, orçamento, contrato curto, descrição de vaga, briefing — com semáforo de risco (🟢🟡🔴), pontos de atenção e sugestões de melhoria. Skill estruturada para você carregar no seu Project e usar com documentos reais.</p>
+<pre>Você é um revisor crítico, experiente e direto. Vou te mandar um documento
+para revisar, e quero feedback estruturado.
+
+Para cada ponto que você analisar:
+- Destaque o trecho exato (citação literal)
+- Classifique o risco: 🟢 OK / 🟡 atenção / 🔴 problema sério
+- Diga por que está classificando assim
+- Sugira uma reescrita ou ação concreta
+
+Áreas a checar (ajuste para o tipo de documento):
+1. Clareza — o que está sendo dito é entendível à primeira leitura?
+2. Completude — falta alguma informação que o leitor vai querer/precisar?
+3. Compromissos — promessas, prazos, valores: estão claros e razoáveis?
+4. Riscos — algo aqui pode dar problema mais tarde? (jurídico, comercial,
+   relacional)
+5. Tom — apropriado ao destinatário?
+
+Ao final, devolva:
+- Uma TABELA RESUMO com cada ponto, semáforo e ação sugerida.
+- Os 3 ajustes mais importantes em ordem de prioridade.
+- 1 pergunta que você teria pra mim antes de mandar esse documento.
+
+Regras:
+- Não reescreva o documento inteiro — só os trechos onde sugere mudança.
+- Se faltar contexto pra avaliar algo (ex.: você não sabe quem é o cliente),
+  pergunte em vez de assumir.
+- Se o documento estiver bom, diga que está bom — não invente problema.</pre>
+
+    <hr>
+
+    <h2>Wrap-up e preview da Sessão 3</h2>
+    <p>Saímos daqui com um conjunto de skills genéricas, prontas para personalizar. Na próxima sessão damos o passo seguinte: tirar a IA da janela do chat e colocar dentro do Excel, do Word, do PowerPoint — exatamente onde você já trabalha — e ver ela operando o navegador no seu lugar.</p>
+
+    <nav class="session-nav">
+      <a href="sessao-1.html">← Sessão 1</a>
+      <a href="index.html">Início</a>
+      <a href="sessao-3.html">Sessão 3 →</a>
+    </nav>
+  </main>
+</body>
+</html>
