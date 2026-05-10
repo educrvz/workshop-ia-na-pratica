@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sessão 1 · IA na Prática</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="brand-bar"></div>
+  <main class="container">
+    <p class="eyebrow">DC Cruz · Workshop · Maio 2026</p>
+
+    <p class="subtitle">IA na Prática</p>
+
+    <p class="session-indicator">Sessão 1 de 3</p>
+    <h1>Confiança e fundamentos</h1>
+    <p class="tagline">Tokens, contexto, memória · Anatomia de um prompt · NotebookLM · Alucinações</p>
+
+    <div class="callout callout-config">
+      <strong>Sobre as ferramentas nesta sessão</strong><br>
+      Vocês têm convite para o Claude pago — usem ele. Os prompts também funcionam em ChatGPT, Copilot, Gemini, mas vamos padronizar no Claude para que todo mundo veja a mesma tela. NotebookLM só no exercício 1.3, onde vamos usar especificamente.
+    </div>
+
+    <h2>O que você vai aprender hoje</h2>
+    <ul>
+      <li>O que uma IA realmente é (e o que não é) — tokens, contexto, memória, e por que ela às vezes inventa.</li>
+      <li>Como escrever prompts que funcionam no seu trabalho — e por que um prompt ruim é quase sempre a causa de um resultado ruim.</li>
+      <li>Como configurar a privacidade da sua conta paga do Claude (não vem ajustada por padrão).</li>
+      <li>Como a IA pode responder com base nos seus próprios documentos (RAG), citando a fonte — sem inventar.</li>
+      <li>Três regras práticas que reduzem alucinações e cabem em qualquer prompt.</li>
+    </ul>
+
+    <h2>Agenda</h2>
+    <ul class="toc">
+      <li>Check-in: quem já mexeu em alguma IA antes</li>
+      <li><a href="#fundamentos">A. Fundamentos: o que é uma IA, token, contexto, memória</a></li>
+      <li><a href="#prompt">B. O que é um prompt — e o que separa um bom de um ruim</a></li>
+      <li><a href="#exercicio-1-1">1.1 Exercício — Três personagens, três conceitos: sentindo o efeito do prompt</a></li>
+      <li><a href="#exercicio-1-2">1.2 Exercício — Ajuste a configuração de privacidade do seu Claude</a></li>
+      <li><a href="#exercicio-1-3">1.3 Exercício — NotebookLM: perguntas a um conjunto de documentos</a></li>
+      <li><a href="#alucinacoes">C. Como a IA funciona: alucinações e como evitar</a></li>
+      <li>Wrap-up</li>
+    </ul>
+
+    <hr>
+
+    <h2 id="fundamentos">A. Fundamentos: como uma IA funciona na prática</h2>
+
+    <p>Antes de qualquer exercício, vale entender o que essas ferramentas realmente são — e o que não são. Quatro conceitos resolvem 90% da confusão.</p>
+
+    <h3>1. Uma IA é um autocomplete muito sofisticado</h3>
+    <p>Um <strong>LLM</strong> (<em>Large Language Model</em>) é, no fundo, um autocomplete. Ele recebe um texto e prevê qual é a próxima palavra mais provável. Faz isso bilhões de vezes, treinado em uma fração relevante da internet. O resultado parece "entender" — mas a mecânica é previsão estatística.</p>
+    <p>Consequência prática: <strong>a IA não sabe o que é verdade. Ela sabe o que é provável.</strong> Quando você pergunta algo que ela não sabe, a resposta "mais provável" pode ser inventar algo plausível. Isso é o que chamamos de alucinação. Voltamos nisso no final.</p>
+
+    <h3>2. Token: a unidade que a IA usa para "pensar"</h3>
+    <p>A IA não lê palavras — lê <strong>tokens</strong>. Um token é um pedaço de texto: pode ser uma palavra inteira ("casa"), parte de uma palavra ("incorporadora" vira vários tokens), pontuação ou espaço. Em português, <em>1 token ≈ 0,75 palavra</em>.</p>
+    <p>Por que importa: nos planos pagos por uso (API, alguns planos corporativos), você paga por token. Textos longos custam mais e demoram mais. No plano Claude pago, vocês não precisam se preocupar com isso — está incluso no plano.</p>
+    <div class="callout callout-tip">
+      Cole qualquer texto em <a href="https://platform.openai.com/tokenizer">platform.openai.com/tokenizer</a> e veja como ele é quebrado em tokens. Tente palavras compridas do seu dia-a-dia — "incorporadora", "headhunting", "habite-se" — e veja quantos tokens cada uma consome.
+    </div>
+
+    <h3>3. Contexto: a memória curta da conversa</h3>
+    <p>O <strong>contexto</strong> (ou <em>context window</em>) é a "mesa de trabalho" da IA: tudo que ela consegue ver de uma vez — sua mensagem, o histórico da conversa, os documentos anexados. Cabe muita coisa (centenas de milhares de tokens, um livro inteiro), mas tem limite. Dois efeitos práticos:</p>
+    <ul>
+      <li><strong>Conversas muito longas começam a "esquecer" o início.</strong> Quando a janela enche, as mensagens mais antigas saem. Se a IA parece ter perdido o fio depois de duas horas de conversa, melhor abrir uma nova e trazer só o que importa.</li>
+      <li><strong>Documentos muito grandes podem não caber inteiros.</strong> Se você cola 500 páginas, parte fica fora. Recorte o que interessa.</li>
+    </ul>
+
+    <h3>4. Memória: o que fica entre conversas</h3>
+    <p>Contexto dura uma conversa. <strong>Memória</strong> é diferente: é o que a IA guarda sobre você entre conversas. Claude, ChatGPT e Gemini têm memória persistente (você liga ou desliga nas configurações): a IA lembra que você é corretor, que trabalha com imóveis de alto padrão, que prefere respostas diretas. É um atalho útil — mas vale revisar o que ela está guardando de tempos em tempos.</p>
+
+    <hr>
+
+    <h2 id="prompt">B. O que é um prompt (e o que separa um bom de um ruim)</h2>
+
+    <p>Um <strong>prompt</strong> é a instrução que você dá para a IA. É o único canal pelo qual você se comunica com ela. Toda a qualidade da resposta — tom, formato, precisão — depende de quão bem você escreveu essa instrução.</p>
+
+    <p>Quanto mais específico e contextualizado, melhor o resultado. Um prompt ruim gera um resultado genérico. Um prompt bem feito gera um rascunho que você só precisa revisar.</p>
+
+    <h3>Exemplo: prompt ruim vs. prompt bom</h3>
+
+    <p>❌ <em>"Escreva um e-mail para um cliente que sumiu."</em></p>
+
+    <pre>✅ Você é um profissional experiente, que escreve e-mails diretos e cordiais.
+Escreva um e-mail curto (máx. 4 parágrafos) para um cliente com quem
+não falo há 2 meses, retomando uma proposta que ainda não foi fechada.
+
+Contexto:
+- Cliente: empresário do setor de construção
+- Última conversa: ele pediu para revisar a proposta e voltar com ajustes
+- Tom: cordial mas profissional, sem soar desesperado
+- Quero abrir espaço para uma conversa, não pressionar fechamento
+
+Se faltar contexto para escrever bem alguma parte, me pergunte
+em vez de inventar — não invente nome, data ou detalhe que eu não dei.</pre>
+
+    <p>O que o segundo prompt faz diferente:</p>
+    <ul>
+      <li><strong>Define um papel</strong> — calibra tom e vocabulário.</li>
+      <li><strong>Especifica o formato</strong> (e-mail curto, máx. 4 parágrafos) — a IA não precisa adivinhar.</li>
+      <li><strong>Dá contexto concreto</strong> — quem é o cliente, qual era o estado da relação, qual o objetivo.</li>
+      <li><strong>Dá permissão para não saber</strong> — esta é a instrução mais importante de todas. Sem ela, a IA preenche lacunas com algo plausível mas inventado.</li>
+    </ul>
+
+    <div class="callout callout-tip">
+      <strong>A regra que resolve metade dos problemas:</strong> sempre inclua <em>"Se não souber, pergunte ou diga explicitamente — não invente."</em> Essa única frase reduz drasticamente o risco de alucinação. A gente vai usar ela em praticamente toda skill do workshop.
+    </div>
+
+    <hr>
+
+    <div class="exercise" id="exercicio-1-1">
+      <h2>1.1 Exercício — Três personagens, três conceitos: sentindo o efeito do prompt</h2>
+
+      <p class="callout callout-objective">Ver, na prática, como o mesmo conteúdo muda completamente de cara quando você muda o estilo de quem fala. Você escolhe o personagem e o conceito, e o resultado sai totalmente no personagem — vocabulário, cadência, jeito.</p>
+
+      <p><strong>Ferramenta:</strong> Claude.</p>
+
+      <ol>
+        <li>Copie o prompt abaixo e cole no Claude.</li>
+        <li>A IA vai apresentar 3 personagens. Escolha 1, 2 ou 3.</li>
+        <li>Em seguida, ela apresenta 3 conceitos. Escolha A, B ou C.</li>
+        <li>Ela entrega o conteúdo em 2 parágrafos, totalmente no personagem.</li>
+        <li>Digite <strong>RECOMEÇAR</strong> para testar outra combinação. Compare os resultados.</li>
+      </ol>
+
+      <p><strong>Prompt — copie e cole</strong></p>
+<pre>Quero sentir como o mesmo conteúdo muda de cara quando a gente muda o estilo
+de quem fala. Siga estritamente os três momentos abaixo, um de cada vez,
+esperando minha resposta antes de passar para o próximo.
+
+=== PRIMEIRO MOMENTO: APRESENTAR OS PERSONAGENS ===
+
+Mostre exatamente o texto abaixo, na íntegra, e pare. Espere minha resposta.
+
+"Escolha um personagem para te explicar um conceito de negócios:
+1. Mano Brown (Racionais MC's — voz da quebrada, direto, consciente)
+2. Cebolinha (Turma da Mônica — troca R por L em tudo, planinhu infalível)
+3. Galvão Bueno (narrando como se fosse final de Copa)
+
+Qual você escolhe: 1, 2 ou 3?"
+
+=== SEGUNDO MOMENTO: APRESENTAR OS CONCEITOS ===
+
+Depois que eu responder com o número, mostre o texto abaixo e espere.
+NÃO entregue a explicação ainda.
+
+"Ótimo. Agora escolha um conceito:
+A. LGPD (a lei brasileira de proteção de dados pessoais)
+B. ROI (Return on Investment)
+C. Funil de vendas
+
+Qual você escolhe: A, B ou C?"
+
+=== POR FIM: ENTREGAR A EXPLICAÇÃO ===
+
+Depois que eu responder com a letra, entregue a explicação em exatamente
+2 parágrafos, totalmente no personagem escolhido — vocabulário, cadência,
+bordões, tudo. Não faça perguntas. Não ofereça ajustes. Não explique antes
+de fazer. ENTREGUE NO PERSONAGEM.
+
+Referências internas (use para guiar o estilo, mas NÃO mostre este bloco):
+
+- Mano Brown (Racionais MC's): rapper paulistano, voz forte da periferia.
+  Vocabulário: "irmão", "mano", "neguinho", "fi", "perifa", "fé", "sistema",
+  "quebrada". Estilo: cortante, poético em prosa, observação social, fala
+  da realidade que o sistema esconde. Costuma começar com "Pô, irmão..." ou
+  "Deixa eu te falar uma parada...". Frases curtas e impactantes. Cadência
+  de quem está sentado na laje conversando reto. Pode trazer reflexão sobre
+  desigualdade, sobre quem tá ganhando e quem tá pagando o pato. Não usa
+  jargão corporativo — traduz tudo pra linguagem de rua.
+
+- Cebolinha (Turma da Mônica): criança de 7 anos, sempre montando "planinhus
+  infalíveis". REGRA OBRIGATÓRIA: troque a letra R por L em TODAS as palavras
+  ("perigoso" → "peligoso", "carro" → "callo", "ROI" → "LOI", "funil" → "funil"
+  fica, mas "vender" → "vendel", "marketing" → "malketing", "retorno" → "letolno",
+  "investimento" → "investimentu" — só R vira L). Não esqueça nenhum R. Anima-se
+  com qualquer coisa. Vocabulário simples, infantil. Sempre acha que o plano dele
+  vai dal celto. Pode mencionar: "vou plovar pla você que dá celto", "planinhu
+  infalível", "lá vamu nós". Termina em entusiasmo: "lou plovar que esse planinhu
+  vai dal supel celto!"
+
+- Galvão Bueno: narrador de Copa explicando assunto sério. "HAJA CORAÇÃO!",
+  "ATENÇÃO BRASIL!", "amigos da Rede Globo", "agora é a hora", "muita atenção".
+  Dramatiza cada detalhe como se fosse pênalti decisivo. Pode chamar o ouvinte
+  de "amigo".
+
+- Conceito A (LGPD): explicar para alguém leigo o que é a LGPD e por que
+  qualquer empresa que lida com dados de cliente precisa se preocupar.
+- Conceito B (ROI): explicar o que é ROI, como calcular, e por que é o
+  número que separa investimento de gasto.
+- Conceito C (Funil de vendas): explicar o que é um funil de vendas, por
+  que ele tem etapas, e por que perder clientes em cada etapa é normal.
+
+Ao final dos 2 parágrafos, pule uma linha e escreva, em linguagem normal:
+
+"Se quiser tentar outra combinação, é só digitar RECOMEÇAR."
+
+Se eu digitar RECOMEÇAR em qualquer momento, volte para o PRIMEIRO MOMENTO
+e recomece do zero.</pre>
+
+      <div class="callout callout-context">
+        <strong>Na prática:</strong> a mesma técnica serve para criar guias de estilo para o seu trabalho — capturar o tom de e-mails que você gosta de mandar, o jeito que você fala com cliente, a estrutura de proposta que funciona. O ganho é duplo: economia de tempo (a IA entrega rascunhos que já soam como você) e consistência de voz.
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="exercise" id="exercicio-1-2">
+      <h2>1.2 Exercício — Ajuste a configuração de privacidade do seu Claude</h2>
+
+      <p class="callout callout-objective">Conferir que o Claude não está usando suas conversas para treinar o modelo. Mesmo no plano pago, essa configuração não muda sozinha — você precisa entrar e desligar manualmente.</p>
+
+      <div class="callout callout-warn">
+        <strong>Por que importa:</strong> ter conta paga não significa que tudo que você digitar fica fora do treinamento. Por padrão, o Claude (e ChatGPT, e Gemini) usa as suas conversas para melhorar o modelo, a menos que você desative. Leva 30 segundos.
+      </div>
+
+      <h3>Como ajustar</h3>
+      <ol>
+        <li>Abra <a href="https://claude.ai/settings/data-privacy-controls">claude.ai/settings/data-privacy-controls</a> em uma nova aba.</li>
+        <li>Procure pela opção <strong>"Help improve Claude"</strong> (ou em PT: <em>"Ajude a melhorar o Claude"</em>).</li>
+        <li>Desligue o toggle.</li>
+        <li>Pronto. Suas conversas a partir de agora não vão para treinamento.</li>
+      </ol>
+
+      <div class="callout callout-tip">
+        <strong>Bonus — feedback explícito ainda vai.</strong> Mesmo com o toggle desligado, se você der 👍 ou 👎 em uma resposta, esse feedback específico (com o trecho da conversa) é enviado para a Anthropic. Isso é por design — feedback é como o modelo melhora. Use com critério: se a conversa contém algo confidencial, evite o 👎 e simplesmente refaça o prompt.
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="exercise" id="exercicio-1-3">
+      <h2>1.3 Exercício — NotebookLM: perguntas a um conjunto de documentos</h2>
+
+      <p class="callout callout-objective">Experimentar o que é RAG (<em>Retrieval-Augmented Generation</em>) na prática: a IA responde com base nos documentos que você carregou — não inventa, e cita a fonte. Útil para qualquer situação em que você precisa "interrogar" um conjunto grande de documentos: regras de condomínio, manual de procedimento, especificação técnica, contratos, normas, materiais de estudo.</p>
+
+      <div class="callout callout-tip">
+        <strong>RAG no seu dia-a-dia:</strong> quando você pergunta para o ChatGPT do site de algum produto e ele responde com base no manual daquele produto, isso é RAG. A IA está buscando no que foi carregado, não respondendo de memória. O mesmo princípio do que vamos fazer aqui — só que agora os documentos são <em>seus</em>.
+      </div>
+
+      <p><strong>Ferramenta:</strong> NotebookLM. Notebook do exercício: <a href="https://notebooklm.google.com/notebook/55f906ba-b227-4eda-af3d-2be4a6c63e9b">Negociação Harvard — Workshop IA</a> (princípios da negociação Harvard / método Fisher e Ury — 9 fontes em português sobre BATNA, ZOPA, posições vs. interesses, ganha-ganha).</p>
+
+      <h3>Setup — faça agora</h3>
+      <ol>
+        <li>Abra o <a href="https://notebooklm.google.com/notebook/55f906ba-b227-4eda-af3d-2be4a6c63e9b">notebook do exercício</a>. As fontes já estão carregadas — você não precisa subir nada.</li>
+        <li>Certifique-se de estar logado com sua conta Google (a mesma que você informou no questionário).</li>
+        <li>As fontes aparecem na barra lateral esquerda. Clique em qualquer uma para ver o conteúdo.</li>
+      </ol>
+
+      <h3>Perguntas ao notebook</h3>
+      <p>Copie e cole uma das perguntas abaixo no chat — ou faça a sua própria. Observe como ele cita o trecho do documento de onde tirou cada resposta.</p>
+
+      <p><strong>Sugestões já calibradas para o conteúdo do notebook (princípios de negociação Harvard):</strong></p>
+      <ul>
+        <li><em>"Qual é a diferença entre 'posições' e 'interesses' na negociação Harvard? Cite o trecho exato."</em></li>
+        <li><em>"O que é BATNA e como devo identificar a minha?"</em></li>
+        <li><em>"Os documentos falam sobre como lidar com uma contraparte que age de má-fé?"</em></li>
+        <li><em>"Sobre 'separar pessoas do problema' — há mais de uma fonte tratando disso? Elas se complementam ou se contradizem?"</em></li>
+      </ul>
+
+      <p>Ou monte a sua, usando os modelos abaixo:</p>
+
+      <p><strong>1. Regra específica</strong></p>
+      <pre>Qual é a regra específica sobre [tópico que apareceu nos documentos]?
+Cite o trecho literal do documento e indique em qual seção ou cláusula aparece.</pre>
+
+      <p><strong>2. Pergunta direta</strong></p>
+      <pre>Os documentos mencionam [item concreto]?</pre>
+
+      <p><strong>3. Teste de limites</strong></p>
+      <pre>Os documentos dizem alguma coisa sobre [tópico que provavelmente NÃO está coberto]?</pre>
+
+      <p><strong>4. Fontes divergentes</strong></p>
+      <pre>Sobre [tema], há informação em mais de um documento?
+Se sim, elas se complementam ou se contradizem? Cite os trechos.</pre>
+
+      <div class="callout callout-tip">
+        Repare como o NotebookLM separa o que está literalmente no documento do que ele está inferindo — e sempre aponta a fonte. Isso é o que diferencia uma IA que "responde com tudo" de uma IA que sabe onde para.
+      </div>
+
+      <h3>Recursos do Studio (demo do facilitador)</h3>
+      <p>Esta parte é demo — os recursos do <strong>Studio</strong> do NotebookLM (painel direito) só aparecem para o dono do notebook. A partir dos documentos, ele gera com um clique:</p>
+      <ul>
+        <li><strong>Visão geral em áudio (podcast)</strong> — dois apresentadores conversando sobre o conteúdo. Customizável.</li>
+        <li><strong>Vídeo</strong> — explicação narrada com slides animados.</li>
+        <li><strong>Apresentação em slides</strong> — deck estruturado com referência aos documentos fonte.</li>
+        <li>E também: mapas mentais, flashcards, quizzes, relatórios.</li>
+      </ul>
+      <p>Tudo é gerado a partir do conteúdo do notebook, com fontes rastreáveis.</p>
+
+      <div class="callout callout-tip">
+        <strong>Quer testar no seu notebook:</strong> para ter Studio, você precisa ser dono do notebook. Crie um próprio em <a href="https://notebooklm.google.com">notebooklm.google.com</a>, carregue seus documentos (um manual técnico, uma série de propostas antigas, um conjunto de e-mails de cliente), e os recursos aparecem para você.
+      </div>
+
+      <div class="callout callout-context">
+        <strong>Na prática:</strong> onde no seu trabalho você tem um conjunto de documentos que precisa "interrogar" com frequência? Manual de obra, padrão de proposta, perfil de candidato, regulamento interno, FAQ de cliente — esses são os candidatos naturais para um notebook próprio.
+      </div>
+    </div>
+
+    <hr>
+
+    <h2 id="alucinacoes">C. Como a IA funciona: alucinações e como evitar</h2>
+
+    <h3>3 regras para REDUZIR alucinações</h3>
+    <table>
+      <thead>
+        <tr><th>Regra</th><th>Por quê funciona</th><th>Exemplo prático</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Seja específico</strong></td>
+          <td>Contexto reduz ambiguidade</td>
+          <td>"Revise essa cláusula de garantia para contrato de obra residencial no Brasil" é melhor que "revise isso"</td>
+        </tr>
+        <tr>
+          <td><strong>Peça para citar a fonte</strong></td>
+          <td>Força a IA a ancorar em algo concreto</td>
+          <td>"Cite a norma e o número exato" — se não existir, o modelo tende a admitir.</td>
+        </tr>
+        <tr>
+          <td><strong>Diga "se não souber, fale"</strong></td>
+          <td>Sem isso, a IA preenche com algo plausível mas errado</td>
+          <td>Inclua sempre: <em>"Se não encontrar a informação, diga explicitamente — não tente inferir."</em></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout callout-context">
+      <strong>Regra de ouro:</strong> sempre revise. O output da IA é um ponto de partida, não um produto final. Quem assina o trabalho é você — por isso vale investir nos prompts: tempo escrevendo bem agora é tempo poupado depois na revisão.
+    </div>
+
+    <hr>
+
+    <h2>Onde estamos e o que vem pela frente</h2>
+
+    <p><strong>✓ Sessão 1 — Confiança e fundamentos</strong></p>
+    <ul>
+      <li>Entender o que uma IA é (e não é)</li>
+      <li>Escrever prompts que funcionam</li>
+      <li>Responder com base em documentos seus (RAG)</li>
+      <li>Reduzir alucinações na prática</li>
+    </ul>
+
+    <p><strong>Sessão 2 — Produtividade na prática</strong></p>
+    <ul>
+      <li>Reconhecer quando vale salvar um prompt para reutilizar</li>
+      <li>Transformar notas de reunião em ata em minutos</li>
+      <li>Calibrar um prompt e transformá-lo em skill reutilizável</li>
+      <li>Conhecer uma biblioteca de skills como ponto de partida</li>
+    </ul>
+
+    <p><strong>Sessão 3 — Indo além</strong></p>
+    <ul>
+      <li>Ver a IA operando o seu navegador por conta própria</li>
+      <li>Gerar um deck de cliente a partir de um texto</li>
+      <li>Claude integrado ao Excel, Word e PowerPoint</li>
+      <li>Para onde ir depois do workshop</li>
+    </ul>
+
+    <nav class="session-nav">
+      <a href="index.html">← Início</a>
+      <a href="sessao-2.html">Sessão 2 →</a>
+    </nav>
+  </main>
+</body>
+</html>
