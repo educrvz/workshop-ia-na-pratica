@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sessão 3 · IA na Prática</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="brand-bar"></div>
+  <main class="container">
+    <p class="eyebrow">DC Cruz · Workshop · Maio 2026</p>
+
+    <p class="subtitle">IA na Prática</p>
+
+    <p class="session-indicator">Sessão 3 de 3</p>
+    <h1>Indo além</h1>
+    <p class="tagline">Claude no Chrome · Geração de deck · Claude dentro do Office (Excel, Word, PowerPoint) · Próximos passos</p>
+
+    <div class="callout callout-config">
+      <strong>Sobre as ferramentas nesta sessão</strong><br>
+      As demos agênticas (Claude no Chrome, integrações com Excel/Word/PowerPoint) usam o plano pago do Claude que vocês receberam. A extensão do Chrome se instala em segundos.
+    </div>
+
+    <h2>Agenda</h2>
+    <ul class="toc">
+      <li><a href="#conceito-olhos">A. Por que a IA precisa de "olhos"</a></li>
+      <li><a href="#demo-chrome">Demos do Claude no Chrome — LinkedIn e limpeza de inbox</a></li>
+      <li><a href="#exercicio-3-1">3.1 Exercício — Do texto ao deck</a></li>
+      <li><a href="#office-integracoes">B. Claude dentro do Office: Excel, Word e PowerPoint</a></li>
+      <li><a href="#quer-mais">Quer mais? Próximos passos</a></li>
+      <li>Encerramento</li>
+    </ul>
+
+    <hr>
+
+    <h2 id="conceito-olhos">A. Por que a IA precisa de "olhos"</h2>
+
+    <p>Um modelo de linguagem tem duas limitações fundamentais que a maioria das pessoas não percebe:</p>
+
+    <p><strong>1. Ele foi treinado até uma data e não sabe o que aconteceu depois.</strong> Tudo que aconteceu depois disso, ele não sabe: notícias da semana, dados de mercado atualizados, lançamentos da concorrência. <em>Experimente: pergunte ao Claude qual é a data de corte do treinamento dele.</em></p>
+
+    <p><strong>2. Ele só conhece o que você digita no chat.</strong> Não consegue acessar sites que exigem login, não consegue ler o seu e-mail, não consegue abrir uma pasta no seu computador. É como um consultor brilhante trancado numa sala há meses sem janelas — e sem jornal.</p>
+
+    <p>As ferramentas que vamos ver agora resolvem exatamente isso:</p>
+    <ul>
+      <li><strong>Claude no Chrome:</strong> dá à IA acesso à página que você está vendo — incluindo sites com login (LinkedIn, Gmail, sistemas internos) e conteúdo atual que ela não conseguiria acessar sozinha.</li>
+      <li><strong>Claude dentro do Office (Excel, Word, PowerPoint):</strong> dá à IA acesso aos arquivos com que você trabalha, sem você ter que copiar e colar.</li>
+    </ul>
+
+    <hr>
+
+    <h2 id="demo-chrome">Demos do Claude no Chrome</h2>
+    <p>Estas duas demos são do facilitador — você assiste e faz perguntas. A extensão funciona no Chrome com plano pago Claude.</p>
+
+    <p>O verdadeiro poder aqui não é apenas ler um site — é que o Claude consegue <strong>usar o seu navegador como se fosse você</strong>. Ele analisa conteúdo atrás de login (LinkedIn, e-mail), preenche campos, clica em botões. É a IA fazendo, não só conversando.</p>
+
+    <h3>Demo 1 — Pesquisa de pessoa no LinkedIn antes de uma reunião</h3>
+    <p>Antes de uma reunião com um candidato, um possível parceiro, um empresário que você vai conhecer — você quer saber quem está do outro lado da mesa. O facilitador vai abrir o LinkedIn logado e pedir um briefing direto da página do perfil.</p>
+
+    <p><strong>Prompt — pesquisa de pessoa no LinkedIn</strong></p>
+<pre>Você está vendo o perfil de [nome] no LinkedIn. Com base apenas no que
+está visível na página:
+
+1. Carreira em uma frase: o que essa pessoa fez, onde, e o que está fazendo agora.
+2. Padrões: setores, tipo de cargo, tipo de empresa por onde passou.
+3. Pontos de conexão: o que aparece no perfil que pode virar conversa
+   na reunião (post recente, mudança de cargo, projeto, livro citado).
+4. O que NÃO está claro a partir do perfil — perguntas que vale fazer
+   na reunião.
+
+Não invente histórico além do que está visível. Se faltar contexto, diga.</pre>
+
+    <h3>Demo 2 — Limpeza de inbox: Claude descadastra você de e-mails de marketing</h3>
+    <p>Inbox cheio de promoção, newsletter que você nunca leu, lojas que pegaram seu e-mail num cadastro qualquer. Em vez de gastar 30 minutos clicando em "unsubscribe" um por um, o facilitador vai abrir o Gmail e pedir ao Claude para fazer essa varredura.</p>
+
+    <p>O Claude vai abrir os e-mails promocionais um por um, encontrar o link de "cancelar inscrição" no rodapé, clicar, confirmar — e depois te mostrar uma lista do que foi cancelado.</p>
+
+    <p><strong>Prompt — limpeza de inbox</strong></p>
+<pre>Você está no meu Gmail. Preciso limpar minha inscrição em listas de
+e-mail promocional que eu não leio mais. Faça o seguinte:
+
+1. Vá para a aba "Promoções" (Promotions) — é onde o Gmail joga
+   automaticamente e-mail de marketing.
+2. Para cada remetente que aparecer, abra o e-mail mais recente.
+3. Procure no rodapé o link de "unsubscribe" ou "cancelar inscrição".
+4. Clique nele e siga o fluxo de cancelamento (geralmente é uma
+   confirmação simples — clique para confirmar). Se a página pedir
+   senha ou login, PARE e me pergunte.
+5. Volte para a inbox e siga para o próximo remetente.
+
+Mantenha uma lista do que você cancelou e do que não conseguiu cancelar
+(e por quê). No final, me devolva essa lista.
+
+ATENÇÃO:
+- Não cancele inscrição em nada que pareça transacional (extrato bancário,
+  recibo de compra, status de pedido, confirmação de reserva).
+- Não cancele newsletter que pareça profissional/relevante. Se tiver dúvida,
+  PERGUNTE antes de cancelar.
+- Não delete e-mails. Só cancele inscrição.
+
+Limite: 15 remetentes nesta passada. No final, me mostra a lista para
+eu decidir se rodo de novo.</pre>
+
+    <div class="callout callout-tip">
+      <strong>Observação:</strong> esse mesmo padrão funciona para várias tarefas chatas e repetitivas que envolvem clicar em coisas — preencher formulários, processar pedidos, varrer um site atrás de informação específica. A regra é a mesma: instruções claras, lista de "não faça isso", e pergunte quando tiver dúvida.
+    </div>
+
+    <div class="callout callout-tip">
+      <strong>Como instalar a extensão:</strong><br>
+      <a href="https://chromewebstore.google.com/detail/claude/fcoeoabgfenejglbffodgkkbkcdhcgfn">chromewebstore.google.com/detail/claude</a><br>
+      Só funciona no Google Chrome. Requer plano pago no Claude (vocês têm).
+    </div>
+
+    <hr>
+
+    <div class="exercise" id="exercicio-3-1">
+      <h2>3.1 Exercício — Da sua proposta ao deck</h2>
+
+      <p class="callout callout-objective">Pegar uma proposta comercial sua — texto corrido, em Word ou PDF — e transformar num deck pronto para apresentar ao cliente. Mesma proposta, formato visual.</p>
+
+      <div class="callout callout-config">
+        <strong>Geração de .pptx é feature avançada</strong><br>
+        Gerar apresentações .pptx direto de um LLM é um recurso relativamente novo. Até pouco tempo as pessoas usavam ferramentas especializadas como <a href="https://gamma.app">Gamma</a> ou <a href="https://manus.im">Manus</a> para chegar em algo realmente apresentável. Hoje os LLMs de uso geral estão alcançando rápido, mas os resultados ainda variam. Se o resultado inicial for fraco, dê referências visuais concretas ("estilo McKinsey", "estilo apresentação corporativa minimalista").
+      </div>
+
+      <ol>
+        <li><strong>Pegue uma proposta comercial sua.</strong> Pode ser uma proposta recente que você fez para um cliente (real ou prospect), uma proposta antiga, ou uma proposta hipotética que você esboce em 1-2 parágrafos agora. Não precisa estar polida — texto corrido funciona. Se preferir, anexe o arquivo Word/PDF direto na conversa do Claude.</li>
+        <li>Cole o prompt abaixo no Claude.</li>
+        <li>Cole o texto da proposta logo depois do prompt (ou anexe o arquivo).</li>
+        <li>Baixe o arquivo .pptx gerado. Abra, revise, peça ajustes se necessário.</li>
+      </ol>
+
+      <div class="callout callout-tip">
+        <strong>Não tem proposta à mão?</strong> Esboce uma em 30 segundos: <em>"Proposta para [cliente fictício] de [serviço] no valor de R$ X, com prazo de Y, escopo Z."</em> Bate o suficiente para o exercício. O foco aqui é a transformação, não o conteúdo.
+      </div>
+
+      <p><strong>Prompt — copie e cole</strong></p>
+<pre>Transforme a proposta comercial abaixo em uma apresentação .pptx — um deck
+que eu possa abrir na frente do cliente para apresentar a proposta de forma
+visual e organizada. Não é uma explicação genérica de "o que é uma proposta";
+é a MINHA proposta concreta, virando deck.
+
+Estrutura sugerida (entre 5 e 8 slides — adapte ao conteúdo da proposta):
+1. Capa: nome do cliente + título da proposta + minha empresa/nome
+2. Diagnóstico ou contexto: o que motivou essa proposta (problema, oportunidade)
+3. O que está sendo proposto (escopo)
+4. Como vai ser feito (entregáveis, etapas, prazo)
+5. Investimento e condições (valores, formas de pagamento, validade)
+6. Por que comigo / por que essa proposta (diferenciais, prova)
+7. Próximos passos
+
+Para cada slide: título curto + 3 a 5 bullets concisos OU um elemento
+visual (tabela de valores, timeline simples, lista de entregáveis).
+Linguagem direta, em português brasileiro. Tom profissional mas humano.
+
+Identidade visual:
+- Cor principal: charcoal (#414042) — títulos e destaque
+- Cor secundária: cinza claro (#dbdcdd) — fundos, divisores
+- Cor de acento: dourado (#FFCC00) — usar com parcimônia (linha vertical
+  de destaque, barra fina sob título, underline em palavra-chave). Nunca
+  como fundo de caixa nem em blocos grandes — é acento, não cor dominante.
+- Fundo dos slides: branco (#ffffff)
+- Cor do texto: charcoal (#414042)
+- Fonte: Segoe UI (regular para corpo, bold para títulos)
+- Paleta restrita: além das três cores acima e do branco, não adicione mais
+  nenhuma. O design vive da restrição.
+
+Design:
+- Capa com título grande sobre fundo branco, barra charcoal no topo ou na
+  lateral, e uma linha fina dourada como acento.
+- Hierarquia clara: títulos muito maiores que bullets.
+- Uso generoso de espaço em branco — slides densos cansam.
+- Slide de valores SEMPRE com tabela limpa (não apenas bullets).
+- Slide de cronograma SEMPRE com timeline visual (linha do tempo simples).
+
+Regras importantes:
+- Se a proposta não tiver alguma das informações da estrutura acima
+  (ex.: você não falou sobre prazo), NÃO INVENTE — deixe o slide com um
+  marcador [A DEFINIR] e me pergunte ao final o que preencher.
+- Não invente nome de cliente, valores, prazos ou diferenciais que eu
+  não tenha mencionado.
+
+Proposta:
+[cole o texto ou anexe o arquivo abaixo]</pre>
+
+      <h3>Compare os resultados (opcional)</h3>
+      <p>Se você tem acesso a outras ferramentas (ChatGPT, Gemini, Copilot, Gamma, Manus), rode o mesmo prompt em cada uma e compare. Hoje os resultados ainda variam bastante — design, densidade, fidelidade ao texto-fonte. Para muitos casos, ferramentas especializadas (Gamma, Manus) ainda entregam visual mais polido — mas os LLMs de uso geral oferecem mais controle sobre o conteúdo.</p>
+    </div>
+
+    <hr>
+
+    <h2 id="office-integracoes">B. Claude dentro do Office: Excel, Word e PowerPoint</h2>
+
+    <p>Tudo até aqui foi a IA <em>fora</em> dos seus arquivos — você copia, cola, baixa. As integrações Office colocam a IA <em>dentro</em> do arquivo, lendo os dados que estão ali, escrevendo direto na célula ou no parágrafo. Para vocês que trabalham muito com Excel, Word e PowerPoint, é a integração que mais economiza fricção no dia-a-dia.</p>
+
+    <h3>Excel — pergunte à sua planilha</h3>
+    <p>Excel é o app mais usado para análise de dados na maioria das empresas — e também o mais lento de operar quando você não tem fórmula pronta. Com Claude integrado ao Excel, você pergunta em linguagem natural e ele lê os dados, gera a fórmula, devolve a tabela.</p>
+
+    <p><strong>Demo concreta — priorização de leads</strong></p>
+    <p>O facilitador vai abrir uma planilha com ~200 linhas de leads (nome, fonte, status, valor potencial estimado, último contato). Sem fórmula pronta. Pede:</p>
+<pre>Veja a planilha que está aberta. Quero priorizar quem entrar em contato
+esta semana. Para cada lead, calcule um SCORE simples baseado em:
+- valor potencial (peso 50%)
+- recência do último contato (peso 30%)
+- fonte (indicação > orgânico > pago, peso 20%)
+
+Depois:
+1. Crie uma coluna "Score" e preencha para cada linha.
+2. Ordene a planilha por score, decrescente.
+3. Pinte de verde claro os top 10.
+4. Me devolva, em uma frase, o padrão que você notou nos top 10.</pre>
+    <p>O Claude executa direto na planilha, escreve as fórmulas, ordena, pinta as células, e devolve a observação. Tempo total: cerca de 30 segundos. O mesmo padrão serve para análise de orçamento, follow-up de propostas, ranking de fornecedores.</p>
+
+    <h3>Word — revisão e leitura crítica direto no documento</h3>
+    <p>Word é o app universal de documentos longos — propostas, contratos, relatórios, descrições de vaga. Com Claude integrado, você não precisa copiar o texto pra fora.</p>
+
+    <p><strong>Demo concreta — leitura crítica de proposta de fornecedor</strong></p>
+    <p>O facilitador abre uma proposta de fornecedor de 12 páginas (orçamento de obra, descrição de serviço, condições). Em vez de ler tudo, pede:</p>
+<pre>Você está vendo uma proposta de fornecedor que acabou de chegar. Me devolva,
+direto neste documento, comentários (track changes) marcando:
+
+1. Os 3 valores mais importantes (preço, prazo, multa) — destaque com
+   comentário "VALOR-CHAVE".
+2. Qualquer cláusula que pareça assimétrica (uma parte pega muito mais
+   risco que a outra) — comentário "ATENÇÃO" + frase explicando.
+3. Qualquer ambiguidade ou parte vaga — comentário "REVER".
+
+No final, em uma caixa de texto separada (não no corpo do documento),
+me devolva:
+- Resumo do que está sendo proposto em 3 linhas.
+- 3 perguntas que eu deveria fazer ao fornecedor antes de assinar.</pre>
+    <p>Resultado: a proposta volta marcada com comentários nos pontos certos. Você lê só os trechos comentados. Tempo: 1 minuto. O mesmo padrão serve para revisar contrato curto, descrição de vaga, briefing técnico.</p>
+
+    <h3>PowerPoint — ajustar e treinar apresentação</h3>
+    <p>O exercício 3.1 mostrou como gerar um deck do zero. A integração no PowerPoint vai além: você abre uma apresentação existente e pede ajustes ou um script de fala para apresentar.</p>
+
+    <p><strong>Demo concreta — script de apresentação a partir de um deck pronto</strong></p>
+    <p>O facilitador abre um deck antigo (uma apresentação institucional, um pitch). Pede:</p>
+<pre>Você está vendo um deck que vou apresentar para um cliente novo na semana
+que vem. Tenho 15 minutos.
+
+Para cada slide do deck:
+- Me dê um script de fala de 30-45 segundos. Linguagem falada, não lida.
+  Como se eu estivesse explicando para alguém numa mesa de café.
+- Aponte 1 pergunta que provavelmente vão me fazer nesse slide e como
+  eu deveria responder.
+
+No final do script:
+- Sugira 1-2 slides que faltam para a apresentação ficar completa
+  (ex.: slide de prova social, slide de próximos passos).
+- Sugira 1-2 slides que estão sobrando ou que podem ser cortados se o
+  tempo apertar.</pre>
+    <p>Resultado: você sai com o deck já memorizado e com perguntas-armadilha mapeadas — sem reler tudo dez vezes na noite anterior.</p>
+
+    <div class="callout callout-warn">
+      <strong>Disponibilidade:</strong> as integrações Office completas (operando dentro do app) requerem plano pago no Claude (vocês têm) e podem ter requisitos adicionais (Office desktop, Mac ou Windows). Para uso casual, você ainda pode subir o arquivo na conversa do Claude e pedir o que precisar — funciona, só não é tão fluido quanto a integração nativa.
+    </div>
+
+    <hr>
+
+    <h2 id="quer-mais">Quer mais? Próximos passos</h2>
+
+    <h3>1 · Claude Desktop com plugins</h3>
+    <p>Hoje o Claude é a IA mais avançada para uso profissional. Baixem o Claude Desktop em <a href="https://claude.ai/download">claude.ai/download</a>. O desktop tem funcionalidades que o navegador não tem — incluindo plugins para áreas específicas (vendas, operações, finance) que vocês podem ativar conforme a necessidade.</p>
+
+    <h3>2 · Cowork — para delegar tarefas</h3>
+    <p>Quando vocês quiserem sair do "conversar com a IA" para "pedir para a IA fazer", o <strong>Cowork</strong> executa tarefas no seu computador em linguagem natural — arrumar uma pasta, renomear arquivos, montar um resumo a partir de vários documentos, agendar tarefas recorrentes. Disponível em <a href="https://claude.ai">claude.ai</a> para planos pagos, Mac e Windows.</p>
+
+    <h3>3 · Estamos aqui</h3>
+    <p>Qualquer dúvida, ideia nova ou skill que queira refinar: nos manda mensagem no WhatsApp. Não precisa esperar o próximo workshop.</p>
+
+    <hr>
+
+    <h2>Obrigado por participar.</h2>
+    <p>Foi um prazer trabalhar com vocês nessas três sessões. Esperamos que as skills, os prompts e as ferramentas que exploramos juntos façam diferença real no seu trabalho — já na próxima semana.</p>
+    <p><strong>Fernanda e Edu — DC Cruz</strong></p>
+
+    <nav class="session-nav">
+      <a href="sessao-2.html">← Sessão 2</a>
+      <a href="index.html">Início</a>
+    </nav>
+  </main>
+</body>
+</html>
