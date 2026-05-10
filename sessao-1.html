@@ -334,34 +334,62 @@ Se sim, elas se complementam ou se contradizem? Cite os trechos.</pre>
 
     <h2>Onde estamos e o que vem pela frente</h2>
 
-    <p><strong>✓ Sessão 1 — Confiança e fundamentos</strong></p>
-    <ul>
-      <li>Entender o que uma IA é (e não é)</li>
-      <li>Escrever prompts que funcionam</li>
-      <li>Responder com base em documentos seus (RAG)</li>
-      <li>Reduzir alucinações na prática</li>
-    </ul>
+    <div class="roadmap">
+      <div class="roadmap-card completed">
+        <div class="check">✓</div>
+        <div class="session-label">Sessão 1</div>
+        <div class="session-title-small">Confiança e fundamentos</div>
+        <ul>
+          <li>Entender o que uma IA é (e não é)</li>
+          <li>Escrever prompts que funcionam</li>
+          <li>Responder com base em documentos seus (RAG)</li>
+          <li>Reduzir alucinações na prática</li>
+        </ul>
+      </div>
 
-    <p><strong>Sessão 2 — Produtividade na prática</strong></p>
-    <ul>
-      <li>Reconhecer quando vale salvar um prompt para reutilizar</li>
-      <li>Transformar notas de reunião em ata em minutos</li>
-      <li>Calibrar um prompt e transformá-lo em skill reutilizável</li>
-      <li>Conhecer uma biblioteca de skills como ponto de partida</li>
-    </ul>
+      <div class="roadmap-card">
+        <div class="session-label">Sessão 2</div>
+        <div class="session-title-small">Produtividade na prática</div>
+        <ul>
+          <li>Reconhecer quando vale salvar um prompt para reutilizar</li>
+          <li>Transformar notas de reunião em ata em minutos</li>
+          <li>Calibrar um prompt e transformá-lo em skill reutilizável</li>
+          <li>Conhecer uma biblioteca de skills como ponto de partida</li>
+        </ul>
+      </div>
 
-    <p><strong>Sessão 3 — Indo além</strong></p>
-    <ul>
-      <li>Ver a IA operando o seu navegador por conta própria</li>
-      <li>Gerar um deck de cliente a partir de um texto</li>
-      <li>Claude integrado ao Excel, Word e PowerPoint</li>
-      <li>Para onde ir depois do workshop</li>
-    </ul>
+      <div class="roadmap-card">
+        <div class="session-label">Sessão 3</div>
+        <div class="session-title-small">Indo além</div>
+        <ul>
+          <li>Ver a IA operando o seu navegador por conta própria</li>
+          <li>Gerar um deck de cliente a partir de um texto</li>
+          <li>Claude integrado ao Excel, Word e PowerPoint</li>
+          <li>Para onde ir depois do workshop</li>
+        </ul>
+      </div>
+    </div>
 
     <nav class="session-nav">
       <a href="index.html">← Início</a>
       <a href="sessao-2.html">Sessão 2 →</a>
     </nav>
   </main>
+  <script>
+  document.querySelectorAll('pre').forEach(function(pre) {
+    var btn = document.createElement('button');
+    btn.className = 'copy-btn';
+    btn.type = 'button';
+    btn.setAttribute('aria-label', 'Copiar');
+    btn.title = 'Copiar';
+    btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="4.5" y="4.5" width="8" height="9" rx="1.2" stroke="currentColor" stroke-width="1.3" fill="none"/><path d="M3 11V3.2C3 2.54 3.54 2 4.2 2H10" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" fill="none"/></svg><span class="copied-label">copiado</span>';
+    btn.addEventListener('click', function() {
+      navigator.clipboard.writeText(pre.textContent.trim());
+      btn.classList.add('copied');
+      setTimeout(function() { btn.classList.remove('copied'); }, 1500);
+    });
+    pre.appendChild(btn);
+  });
+  </script>
 </body>
 </html>
