@@ -14,266 +14,338 @@
     <p class="subtitle">IA na Prática</p>
 
     <p class="session-indicator">Sessão 3 de 3</p>
-    <h1>Indo além</h1>
-    <p class="tagline">Claude no Chrome · Geração de deck · Claude dentro do Office (Excel, Word, PowerPoint) · Próximos passos</p>
+    <h1>A IA sai do chat</h1>
+    <p class="tagline">Conectar Gmail, Calendar e Drive · Claude no seu navegador · Claude na sua planilha</p>
 
-    <div class="callout callout-config">
-      <strong>Sobre as ferramentas nesta sessão</strong><br>
-      As demos agênticas (Claude no Chrome, integrações com Excel/Word/PowerPoint) usam o plano pago do Claude que vocês receberam. A extensão do Chrome se instala em segundos.
+    <div class="callout callout-objective">
+      <strong>O que muda hoje:</strong> nas sessões 1 e 2, a IA dependia do que você copiava e colava. Hoje a gente conecta o Claude ao seu e-mail, à sua agenda, ao seu Drive e ao seu navegador — para ela ler e agir nesses lugares por conta própria. Cada um dos três exercícios é hands-on no seu próprio laptop.
     </div>
 
-    <h2>Agenda</h2>
+    <h2>Agenda (60 min)</h2>
     <ul class="toc">
-      <li><a href="#conceito-olhos">A. Por que a IA precisa de "olhos"</a></li>
-      <li><a href="#demo-chrome">Demos do Claude no Chrome — LinkedIn e limpeza de inbox</a></li>
-      <li><a href="#exercicio-3-1">3.1 Exercício — Do texto ao deck</a></li>
-      <li><a href="#office-integracoes">B. Claude dentro do Office: Excel, Word e PowerPoint</a></li>
-      <li><a href="#quer-mais">Quer mais? Próximos passos</a></li>
-      <li>Encerramento</li>
+      <li><a href="#hook">Por que conectar muda tudo (5 min)</a></li>
+      <li><a href="#exercicio-3-1">3.1 Conectar Gmail, Calendar e Drive ao Claude (20 min)</a></li>
+      <li><a href="#exercicio-3-2">3.2 Claude no Chrome — uma tarefa para cada um (20 min)</a></li>
+      <li><a href="#exercicio-3-3">3.3 Claude no Excel — análise forense de planilha (demo, 10 min)</a></li>
+      <li><a href="#proximos">Próximos passos e encerramento (5 min)</a></li>
     </ul>
+
+    <div class="callout callout-warn">
+      <strong>Se o tempo apertar (nota do facilitador):</strong> a ordem de corte abaixo preserva o "wow" sem comprometer o aprendizado.
+      <ol style="margin-top:8px;">
+        <li>Em <strong>3.2</strong>, em vez de cada pessoa escolher uma opção diferente, todos fazem só a <strong>Opção A</strong> (limpeza de inbox) — economiza ~7 min.</li>
+        <li>Pular <strong>"Variações para você guardar"</strong> em 3.1 — fica na página para eles lerem depois.</li>
+        <li>Pular o segundo prompt de 3.3 (<strong>priorização de leads</strong>) — fica como takeaway na página.</li>
+        <li>Pular <strong>item 3</strong> dos Próximos passos (tarefas agendadas) e só mencionar em uma frase.</li>
+      </ol>
+    </div>
 
     <hr>
 
-    <h2 id="conceito-olhos">A. Por que a IA precisa de "olhos"</h2>
+    <h2 id="hook">Por que conectar muda tudo</h2>
 
-    <p>Um modelo de linguagem tem duas limitações fundamentais que a maioria das pessoas não percebe:</p>
+    <p>Um exemplo concreto. Suponha que você pergunte ao Claude:</p>
 
-    <p><strong>1. Ele foi treinado até uma data e não sabe o que aconteceu depois.</strong> Tudo que aconteceu depois disso, ele não sabe: notícias da semana, dados de mercado atualizados, lançamentos da concorrência. <em>Experimente: pergunte ao Claude qual é a data de corte do treinamento dele.</em></p>
+    <p><em>"Sobre o que era minha última conversa com a Maria?"</em></p>
 
-    <p><strong>2. Ele só conhece o que você digita no chat.</strong> Não consegue acessar sites que exigem login, não consegue ler o seu e-mail, não consegue abrir uma pasta no seu computador. É como um consultor brilhante trancado numa sala há meses sem janelas — e sem jornal.</p>
+    <p><strong>Sem conexão</strong> — "Não tenho acesso a essa informação. Você pode me passar o histórico?"</p>
 
-    <p>As ferramentas que vamos ver agora resolvem exatamente isso:</p>
-    <ul>
-      <li><strong>Claude no Chrome:</strong> dá à IA acesso à página que você está vendo — incluindo sites com login (LinkedIn, Gmail, sistemas internos) e conteúdo atual que ela não conseguiria acessar sozinha.</li>
-      <li><strong>Claude dentro do Office (Excel, Word, PowerPoint):</strong> dá à IA acesso aos arquivos com que você trabalha, sem você ter que copiar e colar.</li>
-    </ul>
+    <p><strong>Com Gmail + Calendar conectados</strong> — "Sua última conversa com a Maria foi por e-mail dia 8/5. Ela pediu o orçamento revisado e disse que precisa fechar até sexta. Vocês também têm reunião marcada para quinta às 14h."</p>
+
+    <p>É a mesma IA. O que muda é que agora ela enxerga onde o trabalho realmente acontece — sua caixa de entrada, sua agenda, seus arquivos, e a página que você está vendo no navegador.</p>
+
+    <p>Isso se chama <strong>MCP</strong> (Model Context Protocol). É só um nome técnico para "as conexões do Claude com as suas ferramentas". Você não precisa decorar — só saber que cada conexão (Gmail, Calendar, Drive, etc.) é um <em>conector</em> que você ativa uma vez e fica disponível pra sempre.</p>
 
     <hr>
 
-    <h2 id="demo-chrome">Demos do Claude no Chrome</h2>
-    <p>Estas duas demos são do facilitador — você assiste e faz perguntas. A extensão funciona no Chrome com plano pago Claude.</p>
+    <div class="exercise" id="exercicio-3-1">
+      <h2>3.1 Conectar Gmail, Calendar e Drive ao Claude</h2>
 
-    <p>O verdadeiro poder aqui não é apenas ler um site — é que o Claude consegue <strong>usar o seu navegador como se fosse você</strong>. Ele analisa conteúdo atrás de login (LinkedIn, e-mail), preenche campos, clica em botões. É a IA fazendo, não só conversando.</p>
+      <p class="callout callout-objective">Cada um vai conectar o Gmail, o Google Calendar e o Google Drive na sua própria conta do Claude — e rodar um prompt que usa os três ao mesmo tempo. É um exercício hands-on, todo mundo junto.</p>
 
-    <h3>Demo 1 — Pesquisa de pessoa no LinkedIn antes de uma reunião</h3>
-    <p>Antes de uma reunião com um candidato, um possível parceiro, um empresário que você vai conhecer — você quer saber quem está do outro lado da mesa. O facilitador vai abrir o LinkedIn logado e pedir um briefing direto da página do perfil.</p>
+      <h3>Passo 1 — Abra os conectores no Claude</h3>
+      <ol>
+        <li>Vá em <a href="https://claude.ai/settings/connectors">claude.ai/settings/connectors</a> (ou: avatar no canto superior direito → <strong>Settings</strong> → <strong>Connectors</strong>).</li>
+        <li>Você vai ver uma lista de conectores disponíveis. Procure por <strong>Gmail</strong>, <strong>Google Calendar</strong> e <strong>Google Drive</strong>.</li>
+      </ol>
 
-    <p><strong>Prompt — pesquisa de pessoa no LinkedIn</strong></p>
-<pre>Você está vendo o perfil de [nome] no LinkedIn. Com base apenas no que
+      <h3>Passo 2 — Conecte os três, um por um</h3>
+      <p>Para cada conector (Gmail, Calendar, Drive):</p>
+      <ol>
+        <li>Clique em <strong>Connect</strong>.</li>
+        <li>Faça login com a sua conta Google (a mesma que você usa para e-mail e agenda).</li>
+        <li>Na tela de permissões do Google, autorize. Leia o que está pedindo — você está dando ao Claude acesso de leitura à sua conta. Para o exercício de hoje, autorize tudo.</li>
+        <li>Volte para o Claude. O conector deve aparecer como <strong>Connected</strong>.</li>
+      </ol>
+
+      <div class="callout callout-tip">
+        <strong>Não achou o conector?</strong> A interface do Claude muda de tempos em tempos. Se não aparecer em <em>Settings → Connectors</em>, abra uma conversa nova no Claude e clique no ícone de <strong>+</strong> ou de "ferramentas" perto da caixa de texto — os conectores também ficam acessíveis por ali.
+      </div>
+
+      <h3>Passo 3 — Teste rápido (cada um, em paralelo)</h3>
+      <p>Abra uma conversa nova no Claude e mande:</p>
+<pre>Qual é meu próximo compromisso na agenda?</pre>
+      <p>Se ele responder com um evento real seu, está funcionando. Se ele disser que não tem acesso, volte nos conectores e confira se o Calendar aparece como <em>Connected</em>.</p>
+
+      <h3>Passo 4 — O prompt que junta tudo</h3>
+      <p>Agora o exercício de verdade. Cole este prompt no Claude — ele vai usar Calendar, Gmail e Drive ao mesmo tempo:</p>
+
+<pre>Olha minha agenda para os próximos 3 dias úteis. Para cada compromisso
+que envolva alguém de fora (não é reunião só interna, não é compromisso
+pessoal), me devolva uma ficha curta:
+
+1. Quem é (nome + empresa, se aparecer no convite)
+2. Quando foi a última troca de e-mail com essa pessoa — data e
+   assunto da última mensagem
+3. Em 1-2 linhas: o que ficou pendente da última conversa
+   (o que ELA pediu de mim, ou o que EU pedi dela)
+4. Se você encontrar no meu Drive algum arquivo cujo nome bate com
+   o tema da reunião, me cite o nome do arquivo
+
+Formato: uma ficha por compromisso, separada por linha em branco.
+Se não houver compromissos com gente de fora nos próximos 3 dias,
+me diz isso direto.
+
+Se em algum compromisso faltar dado (ex.: você não achou e-mail
+recente da pessoa), diga "sem histórico recente" — não invente.</pre>
+
+      <div class="callout callout-tip">
+        <strong>Por que esse prompt é poderoso:</strong> antes, preparar essa "ficha de semana" custava 30-40 minutos abrindo Gmail, Calendar e Drive em abas separadas. Agora são 30 segundos. É o tipo de tarefa que vale rodar toda segunda-feira de manhã.
+      </div>
+
+      <h3>Variações para você guardar</h3>
+      <p>O mesmo padrão (agenda + e-mail + drive) serve para várias coisas. Adapte o prompt:</p>
+      <ul>
+        <li><strong>Follow-up de semana passada:</strong> "Liste as reuniões que tive na semana passada com gente de fora e me diga se eu já mandei o follow-up combinado em cada uma — confere no Gmail."</li>
+        <li><strong>Triagem de inbox da manhã:</strong> "Olha meus e-mails não lidos das últimas 24h. Agrupa por urgência (responder hoje / pode esperar / só informativo) e me dá uma frase de resumo por grupo."</li>
+        <li><strong>Caça-arquivo:</strong> "Procura no meu Drive um arquivo que tem a ver com [tema/cliente]. Pode ser o nome do arquivo ou o conteúdo. Me devolve os 3 candidatos mais prováveis com link."</li>
+      </ul>
+    </div>
+
+    <hr>
+
+    <div class="exercise" id="exercicio-3-2">
+      <h2>3.2 Claude no Chrome — uma tarefa para cada um</h2>
+
+      <p class="callout callout-objective">Conectores acessam dados <em>via API</em>. Mas e quando o que você quer está num site com login (LinkedIn, sistema interno, página de compra)? Ou num site que muda toda hora (notícias, comparador de preço)? Aí entra a extensão do Claude no Chrome — ela deixa o Claude <strong>ver e operar a página</strong> exatamente como você faria.</p>
+
+      <h3>Passo 1 — Instale a extensão (todos juntos)</h3>
+      <ol>
+        <li>Abra o <strong>Google Chrome</strong>. Se você usa Safari/Edge/Arc, abra o Chrome só para isso — a extensão só funciona no Chrome.</li>
+        <li>Vá em <a href="https://chromewebstore.google.com/detail/claude/fcoeoabgfenejglbffodgkkbkcdhcgfn">chromewebstore.google.com/detail/claude</a>.</li>
+        <li>Clique em <strong>Add to Chrome</strong> e confirme.</li>
+        <li>Faça login com a sua conta Claude paga.</li>
+        <li>Vai aparecer um ícone do Claude na barra do Chrome. Clique nele — abre um painel lateral. É dali que você conversa.</li>
+      </ol>
+
+      <h3>Passo 2 — Escolha UMA tarefa (cada um pega uma diferente)</h3>
+      <p>Para o exercício, cada um escolhe uma das três opções abaixo. Combine entre vocês para não duplicar — assim a gente vê três coisas diferentes acontecendo ao vivo.</p>
+
+      <h3>Opção A — Limpar a inbox de promoções</h3>
+      <p>Abra o <strong>Gmail no Chrome</strong>, vá na aba <strong>Promoções</strong>. Abra o painel do Claude. Cole:</p>
+<pre>Você está no meu Gmail, aba Promoções. Preciso limpar minha inscrição
+em listas de marketing que eu não leio mais. Faça o seguinte:
+
+1. Para cada remetente que aparecer na lista, abra o e-mail mais recente.
+2. Procure no rodapé o link de "unsubscribe" / "cancelar inscrição".
+3. Clique, siga o fluxo (geralmente é uma confirmação simples).
+   Se a página pedir senha ou login, PARE e me pergunte.
+4. Volte para a inbox, vai para o próximo.
+
+Mantenha uma lista do que cancelou e do que não conseguiu cancelar
+(e por quê). No final, me devolve a lista.
+
+NÃO FAÇA:
+- Não cancele nada transacional (extrato, recibo, status de pedido).
+- Não cancele newsletter que pareça profissional. Em dúvida, PERGUNTE.
+- Não delete e-mails. Só cancele inscrição.
+
+Limite: 10 remetentes nesta rodada. No final mostra a lista para eu
+decidir se rodo de novo.</pre>
+
+      <h3>Opção B — Pesquisar uma pessoa no LinkedIn antes de uma reunião</h3>
+      <p>Escolha alguém com quem você tem reunião nesta semana (cliente, fornecedor, candidato, parceiro). Abra o perfil dessa pessoa no <strong>LinkedIn</strong>, no Chrome. Abra o painel do Claude. Cole:</p>
+<pre>Você está vendo o perfil de [nome] no LinkedIn. Com base APENAS no que
 está visível na página:
 
-1. Carreira em uma frase: o que essa pessoa fez, onde, e o que está fazendo agora.
+1. Carreira em uma frase: o que essa pessoa fez, onde, e o que faz hoje.
 2. Padrões: setores, tipo de cargo, tipo de empresa por onde passou.
-3. Pontos de conexão: o que aparece no perfil que pode virar conversa
-   na reunião (post recente, mudança de cargo, projeto, livro citado).
+3. Pontos de conexão para a conversa: o que aparece no perfil que pode
+   virar pergunta ou comentário (post recente, mudança de cargo,
+   projeto, livro citado, prêmio).
 4. O que NÃO está claro a partir do perfil — perguntas que vale fazer
    na reunião.
 
 Não invente histórico além do que está visível. Se faltar contexto, diga.</pre>
 
-    <h3>Demo 2 — Limpeza de inbox: Claude descadastra você de e-mails de marketing</h3>
-    <p>Inbox cheio de promoção, newsletter que você nunca leu, lojas que pegaram seu e-mail num cadastro qualquer. Em vez de gastar 30 minutos clicando em "unsubscribe" um por um, o facilitador vai abrir o Gmail e pedir ao Claude para fazer essa varredura.</p>
+      <h3>Opção C — Comparar um produto em 3 sites</h3>
+      <p>Pense num produto que você (ou alguém da família) está pra comprar. Abra o painel do Claude no Chrome. Cole (substitua o produto):</p>
+<pre>Quero comprar [exemplo: um Kindle Paperwhite 16GB]. Faça o seguinte:
 
-    <p>O Claude vai abrir os e-mails promocionais um por um, encontrar o link de "cancelar inscrição" no rodapé, clicar, confirmar — e depois te mostrar uma lista do que foi cancelado.</p>
+1. Abra o site da Amazon Brasil em uma aba, busque o produto e pegue:
+   modelo exato, preço atual, prazo de entrega para SP, nota da loja.
+2. Abra o Mercado Livre em outra aba, mesma busca, mesmas informações.
+3. Abra o Magazine Luiza em outra aba, mesma busca, mesmas informações.
+4. Me devolva uma TABELA comparativa (site, modelo, preço, prazo, nota)
+   e indique qual é a melhor opção considerando preço + prazo + reputação.
 
-    <p><strong>Prompt — limpeza de inbox</strong></p>
-<pre>Você está no meu Gmail. Preciso limpar minha inscrição em listas de
-e-mail promocional que eu não leio mais. Faça o seguinte:
-
-1. Vá para a aba "Promoções" (Promotions) — é onde o Gmail joga
-   automaticamente e-mail de marketing.
-2. Para cada remetente que aparecer, abra o e-mail mais recente.
-3. Procure no rodapé o link de "unsubscribe" ou "cancelar inscrição".
-4. Clique nele e siga o fluxo de cancelamento (geralmente é uma
-   confirmação simples — clique para confirmar). Se a página pedir
-   senha ou login, PARE e me pergunte.
-5. Volte para a inbox e siga para o próximo remetente.
-
-Mantenha uma lista do que você cancelou e do que não conseguiu cancelar
-(e por quê). No final, me devolva essa lista.
-
-ATENÇÃO:
-- Não cancele inscrição em nada que pareça transacional (extrato bancário,
-  recibo de compra, status de pedido, confirmação de reserva).
-- Não cancele newsletter que pareça profissional/relevante. Se tiver dúvida,
-  PERGUNTE antes de cancelar.
-- Não delete e-mails. Só cancele inscrição.
-
-Limite: 15 remetentes nesta passada. No final, me mostra a lista para
-eu decidir se rodo de novo.</pre>
-
-    <div class="callout callout-tip">
-      <strong>Observação:</strong> esse mesmo padrão funciona para várias tarefas chatas e repetitivas que envolvem clicar em coisas — preencher formulários, processar pedidos, varrer um site atrás de informação específica. A regra é a mesma: instruções claras, lista de "não faça isso", e pergunte quando tiver dúvida.
-    </div>
-
-    <div class="callout callout-tip">
-      <strong>Como instalar a extensão:</strong><br>
-      <a href="https://chromewebstore.google.com/detail/claude/fcoeoabgfenejglbffodgkkbkcdhcgfn">chromewebstore.google.com/detail/claude</a><br>
-      Só funciona no Google Chrome. Requer plano pago no Claude (vocês têm).
-    </div>
-
-    <hr>
-
-    <div class="exercise" id="exercicio-3-1">
-      <h2>3.1 Exercício — Da sua proposta ao deck</h2>
-
-      <p class="callout callout-objective">Pegar uma proposta comercial sua — texto corrido, em Word ou PDF — e transformar num deck pronto para apresentar ao cliente. Mesma proposta, formato visual.</p>
-
-      <div class="callout callout-config">
-        <strong>Geração de .pptx é feature avançada</strong><br>
-        Gerar apresentações .pptx direto de um LLM é um recurso relativamente novo. Até pouco tempo as pessoas usavam ferramentas especializadas como <a href="https://gamma.app">Gamma</a> ou <a href="https://manus.im">Manus</a> para chegar em algo realmente apresentável. Hoje os LLMs de uso geral estão alcançando rápido, mas os resultados ainda variam. Se o resultado inicial for fraco, dê referências visuais concretas ("estilo McKinsey", "estilo apresentação corporativa minimalista").
-      </div>
-
-      <ol>
-        <li><strong>Pegue uma proposta comercial sua.</strong> Pode ser uma proposta recente que você fez para um cliente (real ou prospect), uma proposta antiga, ou uma proposta hipotética que você esboce em 1-2 parágrafos agora. Não precisa estar polida — texto corrido funciona. Se preferir, anexe o arquivo Word/PDF direto na conversa do Claude.</li>
-        <li>Cole o prompt abaixo no Claude.</li>
-        <li>Cole o texto da proposta logo depois do prompt (ou anexe o arquivo).</li>
-        <li>Baixe o arquivo .pptx gerado. Abra, revise, peça ajustes se necessário.</li>
-      </ol>
+Se algum dos sites não tiver o produto exato, registre "não encontrado"
+naquela linha. Não invente preço — só me dá o que está na tela.</pre>
 
       <div class="callout callout-tip">
-        <strong>Não tem proposta à mão?</strong> Esboce uma em 30 segundos: <em>"Proposta para [cliente fictício] de [serviço] no valor de R$ X, com prazo de Y, escopo Z."</em> Bate o suficiente para o exercício. O foco aqui é a transformação, não o conteúdo.
+        <strong>Observação:</strong> o padrão dessas três opções é o mesmo — instruções claras, uma lista do que NÃO fazer, e pedir para perguntar em caso de dúvida. Funciona para qualquer tarefa repetitiva de navegador: preencher formulários, varrer sites de imóveis, juntar informação de cinco páginas de notícia, processar pedidos num sistema interno.
       </div>
-
-      <p><strong>Prompt — copie e cole</strong></p>
-<pre>Transforme a proposta comercial abaixo em uma apresentação .pptx — um deck
-que eu possa abrir na frente do cliente para apresentar a proposta de forma
-visual e organizada. Não é uma explicação genérica de "o que é uma proposta";
-é a MINHA proposta concreta, virando deck.
-
-Estrutura sugerida (entre 5 e 8 slides — adapte ao conteúdo da proposta):
-1. Capa: nome do cliente + título da proposta + minha empresa/nome
-2. Diagnóstico ou contexto: o que motivou essa proposta (problema, oportunidade)
-3. O que está sendo proposto (escopo)
-4. Como vai ser feito (entregáveis, etapas, prazo)
-5. Investimento e condições (valores, formas de pagamento, validade)
-6. Por que comigo / por que essa proposta (diferenciais, prova)
-7. Próximos passos
-
-Para cada slide: título curto + 3 a 5 bullets concisos OU um elemento
-visual (tabela de valores, timeline simples, lista de entregáveis).
-Linguagem direta, em português brasileiro. Tom profissional mas humano.
-
-Identidade visual:
-- Cor principal: charcoal (#414042) — títulos e destaque
-- Cor secundária: cinza claro (#dbdcdd) — fundos, divisores
-- Cor de acento: dourado (#FFCC00) — usar com parcimônia (linha vertical
-  de destaque, barra fina sob título, underline em palavra-chave). Nunca
-  como fundo de caixa nem em blocos grandes — é acento, não cor dominante.
-- Fundo dos slides: branco (#ffffff)
-- Cor do texto: charcoal (#414042)
-- Fonte: Segoe UI (regular para corpo, bold para títulos)
-- Paleta restrita: além das três cores acima e do branco, não adicione mais
-  nenhuma. O design vive da restrição.
-
-Design:
-- Capa com título grande sobre fundo branco, barra charcoal no topo ou na
-  lateral, e uma linha fina dourada como acento.
-- Hierarquia clara: títulos muito maiores que bullets.
-- Uso generoso de espaço em branco — slides densos cansam.
-- Slide de valores SEMPRE com tabela limpa (não apenas bullets).
-- Slide de cronograma SEMPRE com timeline visual (linha do tempo simples).
-
-Regras importantes:
-- Se a proposta não tiver alguma das informações da estrutura acima
-  (ex.: você não falou sobre prazo), NÃO INVENTE — deixe o slide com um
-  marcador [A DEFINIR] e me pergunte ao final o que preencher.
-- Não invente nome de cliente, valores, prazos ou diferenciais que eu
-  não tenha mencionado.
-
-Proposta:
-[cole o texto ou anexe o arquivo abaixo]</pre>
-
-      <h3>Compare os resultados (opcional)</h3>
-      <p>Se você tem acesso a outras ferramentas (ChatGPT, Gemini, Copilot, Gamma, Manus), rode o mesmo prompt em cada uma e compare. Hoje os resultados ainda variam bastante — design, densidade, fidelidade ao texto-fonte. Para muitos casos, ferramentas especializadas (Gamma, Manus) ainda entregam visual mais polido — mas os LLMs de uso geral oferecem mais controle sobre o conteúdo.</p>
     </div>
 
     <hr>
 
-    <h2 id="office-integracoes">B. Claude dentro do Office: Excel, Word e PowerPoint</h2>
+    <div class="exercise" id="exercicio-3-3">
+      <h2>3.3 Claude no Excel — análise forense de uma planilha real (demo)</h2>
 
-    <p>Tudo até aqui foi a IA <em>fora</em> dos seus arquivos — você copia, cola, baixa. As integrações Office colocam a IA <em>dentro</em> do arquivo, lendo os dados que estão ali, escrevendo direto na célula ou no parágrafo. Para vocês que trabalham muito com Excel, Word e PowerPoint, é a integração que mais economiza fricção no dia-a-dia.</p>
+      <p class="callout callout-objective">Esta é uma <strong>demonstração</strong>, não hands-on — o Claude for Excel ainda exige uma instalação específica e só rodaríamos uma vez aqui. Mas o caso é forte: um extrato bancário de 12 meses (~500 linhas) que vira, em poucos minutos, um diagnóstico financeiro categorizado com transações suspeitas sinalizadas. O arquivo e o prompt ficam disponíveis para vocês reproduzirem depois.</p>
 
-    <h3>Excel — pergunte à sua planilha</h3>
-    <p>Excel é o app mais usado para análise de dados na maioria das empresas — e também o mais lento de operar quando você não tem fórmula pronta. Com Claude integrado ao Excel, você pergunta em linguagem natural e ele lê os dados, gera a fórmula, devolve a tabela.</p>
+      <div class="callout callout-config">
+        <strong>Requisitos para reproduzir:</strong> Excel desktop (Mac ou Windows), plano pago do Claude e o add-in <em>Claude for Excel</em> habilitado. Instalação: <a href="https://claude.ai/excel">claude.ai/excel</a>.
+      </div>
 
-    <p><strong>Demo concreta — priorização de leads</strong></p>
-    <p>O facilitador vai abrir uma planilha com ~200 linhas de leads (nome, fonte, status, valor potencial estimado, último contato). Sem fórmula pronta. Pede:</p>
+      <h3>O cenário</h3>
+      <p>Imagine que um cliente novo te entrega o extrato da conta conjunta dele com a esposa — abril/2025 a março/2026, ~500 linhas. Pode ser um advogado preparando uma partilha de bens, um contador conferindo o ano fiscal, ou simplesmente alguém querendo entender pra onde foi o dinheiro de uma conta familiar. Em qualquer cenário, o trabalho manual seria longo: categorizar linha por linha, somar por categoria, detectar padrões estranhos.</p>
+
+      <p><strong>Arquivo do demo:</strong> <a href="data/extrato-conta-conjunta.csv">extrato-conta-conjunta.csv</a> (baixe, abra no Excel, e ative o painel do Claude na lateral).</p>
+
+      <h3>O prompt (copie e cole)</h3>
+
+<pre>Você está vendo um extrato bancário de uma conta conjunta (marido e esposa)
+de abril de 2025 a março de 2026. Colunas: Data, Lançamento, Valor, Saldo.
+Valores negativos são despesas; positivos são entradas.
+
+Faça uma análise forense completa do extrato. Trabalhe direto na planilha:
+
+1. CATEGORIZAÇÃO
+   Crie uma coluna "Categoria" e classifique cada lançamento em UMA destas
+   categorias (use exatamente esses nomes):
+   - Renda (salários, freelance, qualquer entrada)
+   - Moradia (aluguel, condomínio, IPTU)
+   - Contas de casa (luz, água, gás, internet, streaming)
+   - Mercado (supermercado, hortifruti, padaria)
+   - Alimentação fora (restaurante, delivery, ifood, rappi)
+   - Transporte (posto, uber, estacionamento, pedágio)
+   - Saúde (farmácia, plano, consulta)
+   - Educação (escola, curso, mensalidade)
+   - Lazer e viagens (hotel, passagens, parque, cinema)
+   - Compras (roupa, eletrônico, presente, loja em geral)
+   - Transferências PIX/TED enviadas (qualquer transferência saindo)
+   - Outros (o que não couber claramente)
+
+2. RESUMO MENSAL
+   Em uma nova aba ("Resumo mensal"), monte uma tabela com:
+   linhas = mês, colunas = categoria, valores = total gasto (ou recebido).
+   Adicione uma linha "Saldo do mês" (entradas - saídas).
+
+3. TRANSAÇÕES PARA INVESTIGAR
+   Em uma nova aba ("Para investigar"), liste todas as transações que se
+   encaixarem em QUALQUER um destes critérios:
+   - Valor isolado acima de R$ 3.000
+   - Transferências PIX/TED recorrentes para o mesmo destinatário
+     (some o total transferido para cada destinatário no período)
+   - Compras em joalheria, hotel, viagem, restaurante de alto padrão
+   - Lançamentos duplicados no mesmo dia para o mesmo estabelecimento
+   - Qualquer padrão que pareça fora do normal de uma despesa familiar
+
+   Para cada uma, traga: data, lançamento, valor, motivo do flag.
+
+4. PERGUNTAS PARA O CLIENTE
+   No final da aba "Para investigar", monte uma lista numerada de
+   5 a 10 PERGUNTAS específicas que eu deveria fazer ao cliente
+   antes de tirar conclusão. Use os dados concretos — cite valores,
+   datas e destinatários reais do extrato. Exemplo de tom:
+   "Quem é [nome] e por que foram transferidos R$ X em Y datas?"
+
+Regras:
+- Não invente categoria, valor ou destinatário que não esteja no extrato.
+- Se algum lançamento for ambíguo, classifique como "Outros" e cite na
+  lista de perguntas.
+- Use os nomes/valores literais da planilha nas perguntas — não
+  generalize.</pre>
+
+      <h3>O que esperar do resultado</h3>
+      <p>O Claude lê as ~500 linhas, escreve a fórmula de categorização, monta a tabela dinâmica de resumo por mês, e devolve a aba "Para investigar" com transações sinalizadas e perguntas <em>concretas</em> (citando nomes e valores reais). É o tipo de análise que tomaria 3-4 horas manuais e sai em minutos — preservando o seu controle sobre a planilha (as fórmulas estão lá, é seu arquivo, você ajusta).</p>
+
+      <h3>O mesmo padrão serve para</h3>
+      <ul>
+        <li>Fechamento mensal — comparar meses, calcular variação, sinalizar anomalias.</li>
+        <li>Ranking de fornecedores / leads — score por critério, ordenação, semáforo.</li>
+        <li>Follow-up de propostas em aberto — flag de quem está parado há mais de X dias.</li>
+        <li>Limpeza de dados — encontrar duplicatas, padronizar formato, completar campos.</li>
+      </ul>
+
+      <h3>Outro prompt para você levar — priorização de leads</h3>
+      <p>Se vocês trabalham com planilha de leads (corretagem, recrutamento, qualquer pipeline comercial), esse outro prompt é o "primo direto" do demo acima. Mesma lógica, problema diferente:</p>
+
 <pre>Veja a planilha que está aberta. Quero priorizar quem entrar em contato
-esta semana. Para cada lead, calcule um SCORE simples baseado em:
-- valor potencial (peso 50%)
-- recência do último contato (peso 30%)
-- fonte (indicação > orgânico > pago, peso 20%)
+esta semana. Para cada lead, calcule um SCORE de 0 a 100 baseado em:
+
+- Valor potencial (peso 50%)
+- Recência do último contato (peso 30%) — combinado com status, se já
+  está em negociação peso ainda maior
+- Fonte (peso 20%) — indicação > orgânico > pago
 
 Depois:
 1. Crie uma coluna "Score" e preencha para cada linha.
-2. Ordene a planilha por score, decrescente.
-3. Pinte de verde claro os top 10.
-4. Me devolva, em uma frase, o padrão que você notou nos top 10.</pre>
-    <p>O Claude executa direto na planilha, escreve as fórmulas, ordena, pinta as células, e devolve a observação. Tempo total: cerca de 30 segundos. O mesmo padrão serve para análise de orçamento, follow-up de propostas, ranking de fornecedores.</p>
+2. Ordene por Score, decrescente.
+3. Pinte de verde claro as 10 linhas do topo.
+4. Em uma frase, me diz o padrão que você notou nos top 10.
 
-    <h3>Word — revisão e leitura crítica direto no documento</h3>
-    <p>Word é o app universal de documentos longos — propostas, contratos, relatórios, descrições de vaga. Com Claude integrado, você não precisa copiar o texto pra fora.</p>
-
-    <p><strong>Demo concreta — leitura crítica de proposta de fornecedor</strong></p>
-    <p>O facilitador abre uma proposta de fornecedor de 12 páginas (orçamento de obra, descrição de serviço, condições). Em vez de ler tudo, pede:</p>
-<pre>Você está vendo uma proposta de fornecedor que acabou de chegar. Me devolva,
-direto neste documento, comentários (track changes) marcando:
-
-1. Os 3 valores mais importantes (preço, prazo, multa) — destaque com
-   comentário "VALOR-CHAVE".
-2. Qualquer cláusula que pareça assimétrica (uma parte pega muito mais
-   risco que a outra) — comentário "ATENÇÃO" + frase explicando.
-3. Qualquer ambiguidade ou parte vaga — comentário "REVER".
-
-No final, em uma caixa de texto separada (não no corpo do documento),
-me devolva:
-- Resumo do que está sendo proposto em 3 linhas.
-- 3 perguntas que eu deveria fazer ao fornecedor antes de assinar.</pre>
-    <p>Resultado: a proposta volta marcada com comentários nos pontos certos. Você lê só os trechos comentados. Tempo: 1 minuto. O mesmo padrão serve para revisar contrato curto, descrição de vaga, briefing técnico.</p>
-
-    <h3>PowerPoint — ajustar e treinar apresentação</h3>
-    <p>O exercício 3.1 mostrou como gerar um deck do zero. A integração no PowerPoint vai além: você abre uma apresentação existente e pede ajustes ou um script de fala para apresentar.</p>
-
-    <p><strong>Demo concreta — script de apresentação a partir de um deck pronto</strong></p>
-    <p>O facilitador abre um deck antigo (uma apresentação institucional, um pitch). Pede:</p>
-<pre>Você está vendo um deck que vou apresentar para um cliente novo na semana
-que vem. Tenho 15 minutos.
-
-Para cada slide do deck:
-- Me dê um script de fala de 30-45 segundos. Linguagem falada, não lida.
-  Como se eu estivesse explicando para alguém numa mesa de café.
-- Aponte 1 pergunta que provavelmente vão me fazer nesse slide e como
-  eu deveria responder.
-
-No final do script:
-- Sugira 1-2 slides que faltam para a apresentação ficar completa
-  (ex.: slide de prova social, slide de próximos passos).
-- Sugira 1-2 slides que estão sobrando ou que podem ser cortados se o
-  tempo apertar.</pre>
-    <p>Resultado: você sai com o deck já memorizado e com perguntas-armadilha mapeadas — sem reler tudo dez vezes na noite anterior.</p>
-
-    <div class="callout callout-warn">
-      <strong>Disponibilidade:</strong> as integrações Office completas (operando dentro do app) requerem plano pago no Claude (vocês têm) e podem ter requisitos adicionais (Office desktop, Mac ou Windows). Para uso casual, você ainda pode subir o arquivo na conversa do Claude e pedir o que precisar — funciona, só não é tão fluido quanto a integração nativa.
+Se algum lead tiver dado faltando, marque Score como [DADO FALTA] em
+vez de chutar.</pre>
     </div>
 
     <hr>
 
-    <h2 id="quer-mais">Quer mais? Próximos passos</h2>
+    <h2 id="proximos">Próximos passos</h2>
 
-    <h3>1 · Claude Desktop com plugins</h3>
-    <p>Hoje o Claude é a IA mais avançada para uso profissional. Baixem o Claude Desktop em <a href="https://claude.ai/download">claude.ai/download</a>. O desktop tem funcionalidades que o navegador não tem — incluindo plugins para áreas específicas (vendas, operações, finance) que vocês podem ativar conforme a necessidade.</p>
+    <p>Três coisas que valem ter no radar — sem exercício hoje, mas guardem o link.</p>
 
-    <h3>2 · Cowork — para delegar tarefas</h3>
-    <p>Quando vocês quiserem sair do "conversar com a IA" para "pedir para a IA fazer", o <strong>Cowork</strong> executa tarefas no seu computador em linguagem natural — arrumar uma pasta, renomear arquivos, montar um resumo a partir de vários documentos, agendar tarefas recorrentes. Disponível em <a href="https://claude.ai">claude.ai</a> para planos pagos, Mac e Windows.</p>
+    <h3>1. Geração de deck a partir de um texto</h3>
+    <p>Quando você precisar transformar uma proposta comercial (texto corrido, Word, PDF) em uma apresentação .pptx, cole o texto da proposta no Claude com o prompt abaixo. O resultado ainda varia, então valide visualmente — mas é o caminho mais rápido de "texto → deck apresentável" sem precisar abrir o PowerPoint.</p>
 
-    <h3>3 · Estamos aqui</h3>
-    <p>Qualquer dúvida, ideia nova ou skill que queira refinar: nos manda mensagem no WhatsApp. Não precisa esperar o próximo workshop.</p>
+<pre>Transforme a proposta comercial abaixo em uma apresentação .pptx — um
+deck que eu possa abrir na frente do cliente.
+
+Estrutura sugerida (entre 5 e 8 slides):
+1. Capa: cliente + título + minha empresa
+2. Diagnóstico / contexto que motivou a proposta
+3. O que está sendo proposto (escopo)
+4. Como vai ser feito (entregáveis, etapas, prazo)
+5. Investimento e condições (tabela limpa)
+6. Por que comigo (diferenciais)
+7. Próximos passos
+
+Identidade visual: charcoal (#414042) + dourado (#FFCC00) como acento +
+branco. Fundo branco, fonte Segoe UI, paleta restrita.
+
+Regras:
+- Se faltar informação na proposta, marque [A DEFINIR] e pergunte no final.
+- Não invente cliente, valor ou prazo.
+- Tabela limpa no slide de valores. Timeline visual no slide de prazo.
+
+Proposta:
+[cole o texto ou anexe o arquivo]</pre>
+
+      <h3>2. Cowork — para delegar tarefas no seu computador</h3>
+      <p>Quando você quiser sair do "conversar com a IA" para "pedir para a IA fazer no meu computador" — organizar a pasta de Downloads, renomear arquivos em lote, ler 10 PDFs e fazer um resumo, criar um Excel a partir de várias fontes — o <strong>Cowork</strong> é o modo do Claude que executa isso direto na sua máquina, em linguagem natural. Disponível em <a href="https://claude.ai">claude.ai</a> para planos pagos, Mac e Windows.</p>
+
+      <h3>3. Tarefas agendadas — um briefing automático toda manhã</h3>
+      <p>Você pode pedir para o Claude rodar um prompt automaticamente, todo dia, sem você abrir nada. Exemplo: às 7h da manhã, ele olha sua agenda do dia, varre o Gmail, e te manda um WhatsApp/e-mail com o resumo. Isso transforma o prompt do exercício 3.1 em algo que <em>acontece sozinho</em>. Procurar por "Scheduled tasks" no Claude.</p>
+
+    <div class="callout callout-tip">
+      <strong>Se você for guardar UMA coisa de hoje:</strong> deixe o Gmail e o Calendar conectados ao seu Claude, e rode o prompt do exercício 3.1 toda segunda-feira de manhã. É a economia de tempo mais imediata de tudo que vimos no workshop.
+    </div>
 
     <hr>
 
     <h2>Obrigado por participar.</h2>
-    <p>Foi um prazer trabalhar com vocês nessas três sessões. Esperamos que as skills, os prompts e as ferramentas que exploramos juntos façam diferença real no seu trabalho — já na próxima semana.</p>
+    <p>Foi um prazer trabalhar com vocês nessas três sessões. Skills, prompts, conectores, navegador, Excel — tudo isso vira valor real quando entra na rotina da semana, não quando fica anotado num caderno. Comecem por <em>uma</em> coisa, semana que vem. Qualquer dúvida, nos manda no WhatsApp.</p>
     <p><strong>Fernanda e Edu — DC Cruz</strong></p>
 
     <hr>
@@ -308,12 +380,12 @@ No final do script:
       <div class="roadmap-card completed">
         <div class="check">✓</div>
         <div class="session-label">Sessão 3</div>
-        <div class="session-title-small">Indo além</div>
+        <div class="session-title-small">A IA sai do chat</div>
         <ul>
-          <li>Ver a IA operando o seu navegador por conta própria</li>
-          <li>Gerar um deck de cliente a partir de um texto</li>
-          <li>Claude integrado ao Excel, Word e PowerPoint</li>
-          <li>Para onde ir depois do workshop</li>
+          <li>Conectar Gmail, Calendar e Drive ao Claude</li>
+          <li>Claude operando o seu navegador no Chrome</li>
+          <li>Claude trabalhando dentro do Excel</li>
+          <li>Próximos passos: Cowork e tarefas agendadas</li>
         </ul>
       </div>
     </div>
